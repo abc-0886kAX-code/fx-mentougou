@@ -1,8 +1,8 @@
 <!--
  * @Author: zhangyang
  * @Date: 2022-04-24 18:12:18
- * @LastEditors: zhangyang
- * @LastEditTime: 2023-03-09 13:17:50
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-04-14 17:27:09
  * @Description: file content
 -->
 <template>
@@ -16,7 +16,7 @@
 <script>
 import FloatWindowView from "@/components/float-window/float-window.vue";
 
-import { useMars3dSetup } from "@/biz/Mars3d/usecase/useMars3dSetup";
+import { useMars3dSetup } from "@/biz/Mars3D/usecase/useMars3dSetup";
 import { useLayerSetup } from "@/biz/Mars3D/usecase/useLayerSetup";
 import { useFloatWindow } from "@/hooks/useFloatWindow";
 
@@ -36,8 +36,7 @@ export default {
     },
     emit: ["onReady"],
     setup(props, ctx) {
-        const { isMounted, loading, loadStyle, mapbox, mapview } =
-            useMars3dSetup(props, ctx);
+        const { isMounted, loading, loadStyle, mapbox, mapview } = useMars3dSetup(props, ctx);
         useLayerSetup(props, mapview);
         const float = useFloatWindow();
 
@@ -50,7 +49,7 @@ export default {
             loadStyle,
             mapbox,
             mapview,
-            ...float
+            ...float,
         };
     },
 };

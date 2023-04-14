@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 10:58:06
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 15:50:43
+ * @LastEditTime: 2023-04-14 16:21:17
  * @Description:
 -->
 <script setup>
@@ -12,6 +12,7 @@ import ContainerLayout from "@/biz/container/container-layout.vue";
 import { default as setupMars3DConfig } from "@/config/mars3d.conf/index";
 import useUserHomeModule from "@/biz/User/usecase/useUserHomeModule";
 import BusinessModules from "./business-module.js";
+import { LayerLegend } from "@/biz/LayerLegend";
 const { ArcType } = Cesium;
 const layers = [
     {
@@ -48,6 +49,7 @@ function handlerResolve(params) {
 
 <template>
     <mars3d-container class="home" :config="config" :layers="layers" @onReady="handlerMapReady">
+        <LayerLegend class="layer-legend"></LayerLegend>
         <template v-for="(item, index) in modules">
             <ContainerLayout v-if="item.length > 0" :position="setupModulesPosition(index)" :key="index" width="380px">
                 <template v-for="mode in item">
@@ -63,6 +65,21 @@ function handlerResolve(params) {
     width: 100%;
     height: 100%;
     position: relative;
+    .layer-legend {
+        width: 200px;
+        background-image: linear-gradient(to bottom right, #0b133b, #1b2b9b, #4e5dc0);
+        position: fixed;
+        bottom: 15px;
+        right: 470px;
+        z-index: 201;
+        // transform: translateX(-50%);
+        font-size: 14px !important;
+        height: auto;
+        padding: 10px;
+        border-radius: 10px;
+        opacity: 0.9;
+    }
+
     & .data-overview {
         width: 100%;
         height: 29vh;
