@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-12 13:33:18
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 10:50:18
+ * @LastEditTime: 2023-04-14 14:06:53
  * @Description:
 -->
 <script setup>
@@ -44,6 +44,7 @@ function onSubmit() {
         if (data.code === 200) {
             user.setupToken(data.data.token);
             user.setupTruename(data.data.truename);
+            user.setupUserPower(data.data.layers);
             Notification.success({
                 title: "成功!",
                 message: "登录成功!",

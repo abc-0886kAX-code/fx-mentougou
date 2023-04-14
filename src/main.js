@@ -1,9 +1,9 @@
 /*
- * @FilePath: \vue2.7_Mars3D_template\src\main.js
+ * @FilePath: \fx-mentougou\src\main.js
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-12 11:35:58
+ * @LastEditTime: 2023-04-14 15:35:54
  * @Description:
  */
 import Vue from "vue";
@@ -20,8 +20,13 @@ import "normalize.css";
 import "@/assets/style/index.scss";
 import "@/assets/style/mars3d.scss";
 import Mars3DContainer from "@/biz/Mars3D/view/mars3d-container";
-
+import ScreenGridContainer from "@/biz/ScrrenGrid/view/container";
+import ScreenGridNode from "@/biz/ScrrenGrid/view/grid-node";
+import ScreenGridSelect from "@/biz/ScrrenGrid/view/select";
 Vue.use(Mars3DContainer);
+Vue.use(ScreenGridContainer);
+Vue.use(ScreenGridNode);
+Vue.use(ScreenGridSelect);
 Vue.prototype.$echarts = echarts; //挂载到Vue实例上面
 
 const router = extendRouter(Vue);

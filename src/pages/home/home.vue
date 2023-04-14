@@ -3,18 +3,59 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 10:58:06
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 11:04:52
+ * @LastEditTime: 2023-04-14 15:50:43
  * @Description:
 -->
 <script setup>
+import { Cesium } from "mars3d";
+import ContainerLayout from "@/biz/container/container-layout.vue";
 import { default as setupMars3DConfig } from "@/config/mars3d.conf/index";
-const layers = [];
+import useUserHomeModule from "@/biz/User/usecase/useUserHomeModule";
+import BusinessModules from "./business-module.js";
+const { ArcType } = Cesium;
+const layers = [
+    {
+        type: "geojson",
+        name: "MTG_AREA_LAYER",
+        show: true,
+        zIndex: 101,
+        url: "https://data.mars3d.cn/file/geojson/areas/110109.json",
+        symbol: {
+            styleOptions: {
+                fill: true,
+                color: "rgb(255,255,255)",
+                opacity: 0.0,
+                outline: true,
+                outlineColor: "#d90000",
+                outlineWidth: 2,
+                outlineOpacity: 1.0,
+                arcType: ArcType.GEODESIC,
+                clampToGround: true,
+            },
+        },
+        flyTo: true,
+    },
+];
 const config = setupMars3DConfig(3);
 function handlerMapReady(mapview) {}
+
+const { modules, setupModulesPosition } = useUserHomeModule(BusinessModules);
+
+function handlerResolve(params) {
+    console.log(params);
+}
 </script>
 
 <template>
-    <mars3d-container class="home" :config="config" :layers="layers" @onReady="handlerMapReady"> </mars3d-container>
+    <mars3d-container class="home" :config="config" :layers="layers" @onReady="handlerMapReady">
+        <template v-for="(item, index) in modules">
+            <ContainerLayout v-if="item.length > 0" :position="setupModulesPosition(index)" :key="index" width="380px">
+                <template v-for="mode in item">
+                    <component :key="mode.name" :is="mode.component" :class="mode.className" @onResolve="handlerResolve"></component>
+                </template>
+            </ContainerLayout>
+        </template>
+    </mars3d-container>
 </template>
 
 <style scoped lang="scss">
@@ -22,5 +63,52 @@ function handlerMapReady(mapview) {}
     width: 100%;
     height: 100%;
     position: relative;
+    & .data-overview {
+        width: 100%;
+        height: 29vh;
+        z-index: 102;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    & .real-time-monitor {
+        width: 100%;
+        height: 29vh;
+        z-index: 102;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    & .statistical-analysis {
+        width: 100%;
+        height: 29vh;
+        z-index: 102;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    & .sms-management {
+        width: 100%;
+        height: 29vh;
+        z-index: 102;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    & .device-management {
+        width: 100%;
+        height: 29vh;
+        z-index: 102;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    & .system-management {
+        width: 100%;
+        height: 29vh;
+        z-index: 102;
+        overflow: hidden;
+        color: #fff;
+    }
 }
 </style>

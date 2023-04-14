@@ -1,0 +1,143 @@
+$selectFontColor: #fff;
+$selectIconBG: #333;
+$selectBorderColor: #afc4c2;
+
+.screen-grid-select {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url("@/assets/images/gif/beijing.gif");
+    box-sizing: border-box;
+    user-select: none;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-image: linear-gradient(0, $selectBorderColor, transparent);
+        border-left: 30px solid $selectBorderColor;
+        box-sizing: border-box;
+    }
+
+    &::before {
+        top: -6px;
+    }
+
+    &::after {
+        bottom: -6px;
+    }
+
+    &-icon {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 18px;
+        height: 18px;
+        margin: 0 10px;
+        background-color: rgba($color: $selectIconBG, $alpha: 0.3);
+        border: 1px solid transparent;
+        box-sizing: border-box;
+
+        & > i {
+            align-self: center;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            color: $selectFontColor;
+        }
+
+        &::after,
+        &::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            position: absolute;
+        }
+
+        &::after {
+            top: -2px;
+            left: -2px;
+            border-top: 1px solid rgba($color: $selectIconBG, $alpha: 0.6);
+            border-left: 1px solid rgba($color: $selectIconBG, $alpha: 0.6);
+        }
+
+        &::before {
+            bottom: -2px;
+            right: -2px;
+            border-bottom: 1px solid rgba($color: $selectIconBG, $alpha: 0.6);
+            border-right: 1px solid rgba($color: $selectIconBG, $alpha: 0.6);
+        }
+    }
+
+    &-label {
+        padding: 0;
+        margin: 0;
+        line-height: 25px;
+        font-size: 14px;
+        color: $selectFontColor;
+    }
+}
+
+.screen-grid-popup {
+    width: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.screen-grid-select-more {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    font-size: 13px;
+    background-color: #0ec2f5;
+    color: #fff;
+    width: 48px;
+    height: 20px;
+    line-height: 21px;
+    text-align: center;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
+.screen-grid-select-more::before {
+    content: "";
+
+    display: block;
+
+    width: 25px;
+
+    height: 20px;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    transform: skewX(-25deg);
+
+    position: absolute;
+
+    left: -45px;
+
+    animation: guang infinite 1.2s ease-in;
+}
+
+@keyframes guang {
+    50% {
+        left: -75px;
+    }
+
+    100% {
+        left: 70px;
+    }
+}
+
+.screen-grid-select-more:hover {
+    background-color: #47ea1b;
+    color: #fff;
+}

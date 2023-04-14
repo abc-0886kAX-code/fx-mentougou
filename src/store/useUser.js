@@ -3,13 +3,13 @@
  * @Author: zhangyang
  * @Date: 2023-02-07 15:09:09
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 10:53:13
+ * @LastEditTime: 2023-04-14 15:56:42
  * @Description:
  */
 import { defineStore } from "pinia";
 import { isEmptyString } from "~/shared/is";
 
-const paths = ["token"];
+const paths = ["token", "truename", "userpower"];
 
 export const Namespace = "useUser";
 
@@ -17,6 +17,7 @@ export const useUser = defineStore(Namespace, {
     state: () => ({
         token: "",
         truename: "",
+        userpower: "",
     }),
 
     getters: {
@@ -35,9 +36,13 @@ export const useUser = defineStore(Namespace, {
         setupTruename(truename) {
             this.truename = truename;
         },
+        setupUserPower(power) {
+            this.userpower = power;
+        },
         emptyUserInfo() {
             this.token = "";
             this.truename = "";
+            this.userpower = "";
         },
     },
 
