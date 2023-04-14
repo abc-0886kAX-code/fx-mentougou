@@ -1,9 +1,9 @@
 /*
- * @FilePath: \vue2.7_Mars3D_template\src\service\Application.js
+ * @FilePath: \fx-mentougou\src\service\Application.js
  * @Author: maggot-code
  * @Date: 2022-11-24 10:05:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-12 11:21:03
+ * @LastEditTime: 2023-04-14 10:51:10
  * @Description:
  */
 import axios from "axios";
@@ -11,7 +11,7 @@ import { defineService } from "~/service";
 import { useTokenMiddleware } from "@/middleware/token.request";
 
 const define = axios.create({
-    baseURL: "",
+    baseURL: "/FXAPI",
     timeout: import.meta.env.DEV ? 0 : 30000,
 });
 

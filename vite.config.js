@@ -1,9 +1,9 @@
 /*
- * @FilePath: \vue2.7_Mars3D_template\vite.config.js
+ * @FilePath: \fx-mentougou\vite.config.js
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-12 11:33:28
+ * @LastEditTime: 2023-04-14 10:51:55
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -22,7 +22,7 @@ import { vitePluginMars3d } from "vite-plugin-mars3d";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-    const { VITE_ASSETS } = loadEnv(mode, process.cwd());
+    const { VITE_ASSETS, VITE_BASE_URL } = loadEnv(mode, process.cwd());
     console.log(mode, VITE_ASSETS);
     return {
         base: VITE_ASSETS,
@@ -37,6 +37,10 @@ export default defineConfig(({ mode }) => {
                     target: "http://127.0.0.1:8899/",
                     changeOrigin: true,
                     rewrite: (path) => path.replace(/^\/api/, "/api"),
+                },
+                "/FXAPI": {
+                    target: VITE_BASE_URL,
+                    changeOrigin: true,
                 },
             },
         },

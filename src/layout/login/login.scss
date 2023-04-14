@@ -1,0 +1,161 @@
+video {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    height: auto;
+    width: auto;
+    /*加滤镜*/
+    /*filter: blur(15px); //背景模糊设置 */
+    /*-webkit-filter: grayscale(100%);*/
+    /*filter:grayscale(100%); //背景灰度设置*/
+    z-index: 0;
+}
+
+.ytxd-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 80px 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 20;
+
+    &::after {
+        content: "";
+        display: block;
+    }
+
+    & .login-head {
+        align-self: center;
+        width: 1200px;
+        text-align: center;
+        z-index: 20;
+
+        & h1 {
+            display: inline;
+            font-size: 70px;
+            font-family: cursive;
+            color: #fff;
+            text-shadow: 0.1em 0.1em 0.05em #0b91c1;
+        }
+    }
+
+    & .login-body {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 700px;
+        height: 420px;
+        border-radius: 15px;
+        border: 1px solid #cadcf1;
+        background-color: rgba($color: #065e7a, $alpha: 0.4);
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 2%;
+            bottom: -2px;
+            z-index: -1;
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            box-shadow: 0 4px 10px #4c93ec;
+            border-radius: 800px/10px;
+        }
+
+        & h3 {
+            font-size: 30px;
+            color: #fff;
+            text-align: center;
+            padding: 40px 0 30px;
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+
+        & .login-box {
+            align-self: center;
+            width: 60%;
+            border-radius: 5px;
+
+            & :deep(.el-form-item__error) {
+                font-size: 14px;
+                padding-left: 50px;
+            }
+
+            & :deep(.el-input__inner) {
+                height: 60px !important;
+                background-color: transparent !important;
+                border-radius: 30px !important;
+                border: 0;
+                letter-spacing: 1px;
+                padding-left: 30px;
+                margin-bottom: 10px;
+                display: block;
+                width: 100%;
+            }
+
+            & :deep(.el-input__icon) {
+                color: #7c7c7c;
+                height: 60px;
+                line-height: 60px;
+                font-size: 24px;
+                padding-left: 10px;
+            }
+
+            & .login-input {
+                padding-left: 20px;
+                height: 60px;
+                line-height: 60px;
+                border-radius: 30px;
+                margin-bottom: 20px;
+                font-size: 18px;
+                letter-spacing: 1px;
+                color: #666;
+                box-shadow: inset 0px 0px 10px 1px #cdd8e8;
+                background-color: #e8f0fe !important;
+                box-sizing: border-box;
+            }
+
+            & .login-button {
+                position: relative;
+                display: block;
+                width: 80%;
+                height: 50px;
+                padding: 0;
+                margin: 0 auto;
+                line-height: 50px;
+                font-size: 24px;
+                letter-spacing: 3px;
+                border-radius: 300px !important;
+                background-image: linear-gradient(to right, #62aaf1, #206be6);
+                transition: opacity 1s;
+                box-shadow: 0px 15px 10px -15px #a5bfeb;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    bottom: -1px;
+                    left: 7%;
+                    z-index: -1;
+                    width: 80%;
+                    height: 12px;
+                    background-color: transparent;
+                    box-shadow: 0 15px 15px #98b9e3;
+                    border-radius: 30px;
+                }
+
+                &:hover {
+                    background-image: linear-gradient(to left, #62aaf1, #206be6);
+                    opacity: 0.6;
+                }
+            }
+        }
+    }
+}

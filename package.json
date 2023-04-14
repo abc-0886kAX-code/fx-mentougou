@@ -23,7 +23,8 @@
         "uuid": "^9.0.0",
         "vue": "2.7.8",
         "vue-router": "3.6.5",
-        "vue2-scrollbar": "^0.0.3"
+        "vue2-scrollbar": "^0.0.3",
+        "chinese-lunar-calendar": "^1.0.1"
     },
     "devDependencies": {
         "@types/lodash-es": "^4.17.6",

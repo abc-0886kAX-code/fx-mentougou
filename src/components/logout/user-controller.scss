@@ -1,0 +1,70 @@
+.ytxd-user-controller {
+    display: flex;
+    width: auto;
+    height: 100%;
+    overflow: hidden;
+    z-index: 3;
+
+    & .user-icon {
+        align-self: center;
+        width: 40px;
+        height: calc(100% - 20px);
+        font-size: 0;
+        overflow: hidden;
+
+        & > img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    & .user-handler {
+        align-self: center;
+        margin-right: 20px;
+    }
+
+    & :deep(.el-button--primary) {
+        background-color: #0056b0;
+        border-color: #fff;
+    }
+}
+
+.time-display {
+    width: 280px;
+    height: 100%;
+    // margin-right: 30px;
+    // background-color: #000;
+    overflow: hidden;
+}
+
+.boxDay {
+    width: 51%;
+    height: 100%;
+    float: left;
+    font-style: oblique;
+    font-size: 30px;
+    background-image: -webkit-linear-gradient(top, #fff, #7dcaf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-top: 15px;
+    font-weight: 700;
+}
+
+.time-disply-ri {
+    line-height: 20px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.boxWeek {
+    font-weight: 700;
+    background-image: -webkit-linear-gradient(top, #fff, #7dcaf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.boxNl {
+    color: #01c1f3;
+}

@@ -2,7 +2,7 @@
  * @Author: yjl
  * @Date: 2021-04-30 17:36:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2022-11-30 13:15:42
+ * @LastEditTime: 2023-04-14 11:19:18
  * @Description: 天气接口: https://www.yiketianqi.com
 -->
 <template>
@@ -16,13 +16,10 @@
                     {{ weatherData.air }} {{ weatherData.air_level }}
                 </li> -->
                 <li class="other__item">
-                    {{ weatherData.win
-                    }}<span class="color__y">{{ weatherData.win_speed }}</span>
+                    {{ weatherData.win }}<span class="color__y">{{ weatherData.win_speed }}</span>
                 </li>
                 <li class="other__item">
-                    相对湿度<span class="color__b">{{
-                            weatherData.humidity
-                    }}</span>
+                    相对湿度<span class="color__b">{{ weatherData.humidity }}</span>
                 </li>
             </ul>
         </div>
@@ -40,7 +37,6 @@
 
 <script>
 import { getWeather } from "./api/other";
-import { tempStorage } from "@/shared/storage";
 import { EXPIRATION_TIME } from "@/config/constant";
 import { isNil } from "lodash-es";
 export default {
@@ -80,21 +76,14 @@ export default {
             getWeather()
                 .then((res) => {
                     const { data, status } = res;
-                    if (status === 200) {
-                        this.weather = data;
-                        tempStorage.set("weather", data, EXPIRATION_TIME);
-                    }
+                    this.weather = data;
+                    tempStorage.set("weather", data, EXPIRATION_TIME);
                 })
-                .catch((err) => { });
+                .catch((err) => {});
         },
     },
     mounted() {
-        let json = tempStorage.get("weather");
-        if (json) {
-            this.weather = json;
-        } else {
-            this.getWeatherJson();
-        }
+        this.getWeatherJson();
     },
 };
 </script>
@@ -165,7 +154,7 @@ export default {
             border-radius: 5px;
             overflow: hidden;
 
-            &>img {
+            & > img {
                 width: 100%;
                 height: 100%;
             }

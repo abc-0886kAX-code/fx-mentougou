@@ -1,9 +1,9 @@
 /*
- * @FilePath: \数字大厅\src\store\useUser.js
+ * @FilePath: \fx-mentougou\src\store\useUser.js
  * @Author: zhangyang
  * @Date: 2023-02-07 15:09:09
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-03-21 17:53:48
+ * @LastEditTime: 2023-04-14 10:53:13
  * @Description:
  */
 import { defineStore } from "pinia";
@@ -16,6 +16,7 @@ export const Namespace = "useUser";
 export const useUser = defineStore(Namespace, {
     state: () => ({
         token: "",
+        truename: "",
     }),
 
     getters: {
@@ -31,8 +32,12 @@ export const useUser = defineStore(Namespace, {
         setupToken(token) {
             this.token = token;
         },
+        setupTruename(truename) {
+            this.truename = truename;
+        },
         emptyUserInfo() {
             this.token = "";
+            this.truename = "";
         },
     },
 
