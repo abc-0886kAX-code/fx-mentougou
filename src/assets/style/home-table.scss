@@ -1,0 +1,94 @@
+:deep(.el-table--border),
+:deep(.el-table--group) {
+    background-color: transparent;
+}
+
+:deep(.el-table),
+:deep(.el-table tr) {
+    background-color: rgba(173, 197, 217, 0.1);
+    color: #fff;
+}
+
+:deep(.el-table--enable-row-hover),
+:deep(.el-table__body tr:hover > td.el-table__cell) {
+    background-color: rgba(5, 19, 42, 0.5);
+}
+
+:deep(.el-table th.el-table__cell) {
+    background: -webkit-linear-gradient(#094c82, #2a72ac, #67b2ef);
+    color: #fff;
+}
+
+:deep(.el-table--border),
+:deep(.el-table__cell) {
+    border-bottom: 1px solid #fff;
+}
+
+:deep(.el-table),
+:deep(th.el-table__cell.is-leaf) {
+    // border-bottom: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+:deep(.el-table--border .el-table__cell),
+:deep(.el-table__body-wrapper .el-table--border.is-scrolling-left ~ .el-table__fixed) {
+    border-bottom: 1px solid #fff;
+}
+
+:deep(.el-table__cell) {
+    border-right: 1px solid #fff;
+    background-color: transparent;
+}
+
+// 鼠标移入
+:deep(.el-table__body tr.hover-row > td.el-table__cell) {
+    background-color: transparent;
+}
+
+// 选中
+:deep(.el-table__body tr.current-row > td.el-table__cell) {
+    background-color: transparent;
+}
+
+// 翻页
+:deep(.el-pagination__total, .el-pagination__jump) {
+    color: #fff;
+}
+
+:deep(.el-table--border::after),
+:deep(.el-table--group::after),
+:deep(.el-table::before) {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    width: 6px;
+    background: rgba(#98d9ff, 0.1);
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(#98d9ff, 0.5);
+    background-clip: padding-box;
+    min-height: 28px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(#98d9ff, 1);
+}
+
+:root {
+    --green: #52c41a;
+}

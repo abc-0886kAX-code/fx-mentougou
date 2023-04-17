@@ -3,39 +3,51 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-17 11:18:24
+ * @LastEditTime: 2023-04-17 14:37:45
  * @Description:
 -->
 <script setup>
 import { EventType, graphic } from "mars3d";
 import { useMars3d } from "@/biz/Mars3D/usecase/useMars3D";
 import { useLayer } from "@/biz/Mars3D/usecase/useLayer";
+import { useLocation } from "@/biz/Mars3D/usecase/useLocation";
 import { useMars3dEvent } from "@/biz/Mars3D/usecase/useMars3dEvent";
 import { setupBillboardShape } from "@/biz/Mars3D/usecase/useBillboard";
 import { useLayerLegend } from "@/biz/LayerLegend/store/useLayerLegend";
 import { OverviewSite_Obtain, OverviewSite_Server } from "../server";
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
+import { usePopup } from "@/biz/Popup/usecase/usePopup";
 import JISHUIICON from "@/assets/images/points/jishui.png";
 import SHIPINGICON from "@/assets/images/points/shiping.png";
 import YULIANGICON from "@/assets/images/points/yuliang.png";
 const { BillboardEntity } = graphic;
-
+const popup = usePopup();
+const popupEntity = popup.define({
+    width: "70%",
+    template: defineComponent(() => import("../dialog/dialog-data-overview.vue")),
+});
 const tableColumn = [
     {
-        field: "stnm",
+        prop: "stnm",
         label: "名称",
+        align: "center",
+    },
+    {
+        prop: "signname",
+        label: "站点类型",
+        align: "center",
     },
 ];
 
 const setupFloat = (target) => {
     const { attr } = target.graphic;
     return tableColumn.map((item) => {
-        const { label, field } = item;
+        const { label, prop } = item;
         return {
             label,
-            field,
-            text: attr[field] ?? "--",
+            field: prop,
+            text: attr[prop] ?? "--",
         };
     });
 };
@@ -105,6 +117,11 @@ const rainfallPoints = computed(() => {
 });
 const { setupFloatHide, setupFloatWindow } = inject("Mars3dFloat");
 const handlerClick = (target) => {
+    const { graphic } = target;
+    const { attr, name } = graphic;
+
+    popupEntity.show(attr);
+    popupEntity.setupTitle(name);
     setupFloatHide();
     // 弹框
 };
@@ -121,6 +138,17 @@ const { setupBind } = useMars3dEvent({
     [EventType.mouseOut]: setupFloatHide,
 });
 
+function handleRow(row) {
+    const { stcd, sign } = row;
+    const entity = {
+        "01": unref(gather).VideoPointLayer,
+        "02": unref(gather).PondPointLayer,
+        "03": unref(gather).RainfallPointLayer,
+    };
+    const { lockPosition } = useLocation(entity[sign]);
+    lockPosition(stcd);
+}
+
 async function executeQuery() {
     videoClear();
     pondClear();
@@ -131,19 +159,25 @@ async function executeQuery() {
     rainfallEntity.addGraphic(unref(rainfallPoints));
     legendStore.setCheckList([
         {
+            keyword: "video",
             label: "视频站",
             entity: videoEntity,
             size: videoEntity.length,
+            show: true,
         },
         {
+            keyword: "pond",
             label: "积水点",
             entity: pondEntity,
             size: pondEntity.length,
+            show: true,
         },
         {
+            keyword: "rainfall",
             label: "雨量站",
             entity: rainfallEntity,
             size: rainfallEntity.length,
+            show: true,
         },
     ]);
 }
@@ -159,17 +193,23 @@ onBeforeUnmount(() => {
     pondLayer.remove();
     rainfallLayer.remove();
     legendStore.clearCheckList();
+    popup.release(popupEntity);
 });
 </script>
 
 <template>
-    <div class="data-overview-default" v-loading="loading" v-bind="loadStyle">data-overview-default</div>
+    <el-table class="data-overview-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow">
+        <el-table-column type="index" width="50" align="center"> </el-table-column>
+        <template v-for="item in tableColumn">
+            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
+        </template>
+    </el-table>
 </template>
 
 <style scoped lang="scss">
 .data-overview-default {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
 }
 </style>

@@ -1,7 +1,6 @@
 .furnace-dialog {
     padding: 0;
-    // background-color: rgba($color: #051B40, $alpha: 0.8);
-    background: url("@/assets/images/body/banner-box.png") no-repeat;
+    background-color: rgba($color: #051b40, $alpha: 0.8);
     background-size: 100% 100%;
     backdrop-filter: blur(3px);
     box-sizing: border-box;
@@ -15,7 +14,7 @@
     position: relative;
     height: 50px;
     padding: 0;
-    background: url('@/assets/images/header/dialog-header-img.png') no-repeat;
+    background: url("@/assets/images/dialog/dialog-header-img.png") no-repeat;
     background-size: contain;
     background-position: 10px 25px;
     box-sizing: border-box;
@@ -26,7 +25,7 @@
         height: 1px;
         bottom: 0;
         left: 10px;
-        background: repeating-linear-gradient(to right, #17E4C9, #3365A8, #20B6A8);
+        background: repeating-linear-gradient(to right, #17e4c9, #3365a8, #20b6a8);
         content: "";
     }
 

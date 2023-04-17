@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 16:10:57
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-17 11:28:59
+ * @LastEditTime: 2023-04-17 13:12:02
  * @Description:
 -->
 <script setup>
@@ -15,9 +15,25 @@ const { checkList, isHasLayer, group } = storeToRefs(legendStore);
 function setupIcon({ icon }) {
     return icon ?? default_legend_icon;
 }
-function handlerChange(item) {
-    console.log(item);
+function handlerChange() {
+    unref(group).map((item) => {
+        if (unref(checkList).includes(item.keyword)) {
+            item.entity.show = true;
+        } else {
+            item.entity.show = false;
+        }
+    });
 }
+
+watch(
+    group,
+    (layers) => {
+        const dataset = layers.filter((layer) => layer.show).map((layer) => layer.keyword);
+        checkList.value = dataset;
+        handlerChange();
+    },
+    { immediate: true }
+);
 </script>
 
 <template>
