@@ -68,9 +68,7 @@ function setupOptions() {
         yAxis: [
             {
                 type: "value",
-                name: "水位(m)",
-                nameLocation: "start",
-                inverse: true,
+                name: "水深(cm)",
                 alignTicks: true,
                 min: 0,
                 max: function (value) {
@@ -96,7 +94,7 @@ function setupOptions() {
         // 历史雨量 历史水位 预报雨量 预报水位
         series: [
             {
-                name: "水位(m)",
+                name: "水深(cm)",
                 yAxisIndex: 0,
                 data: unref(source).map((item) => Math.ceil(Math.random() * 10)),
                 type: "line",
