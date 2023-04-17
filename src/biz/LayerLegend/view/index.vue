@@ -3,15 +3,21 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 16:10:57
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 16:43:44
+ * @LastEditTime: 2023-04-17 11:28:59
  * @Description:
 -->
 <script setup>
 import { useLayerLegend } from "../store/useLayerLegend";
 import { storeToRefs } from "pinia";
+import default_legend_icon from "@/assets/images/points/default_legend_icon.png";
 const legendStore = useLayerLegend();
-const { checkList, isHasLayer } = storeToRefs(legendStore);
-function handlerChange() {}
+const { checkList, isHasLayer, group } = storeToRefs(legendStore);
+function setupIcon({ icon }) {
+    return icon ?? default_legend_icon;
+}
+function handlerChange(item) {
+    console.log(item);
+}
 </script>
 
 <template>

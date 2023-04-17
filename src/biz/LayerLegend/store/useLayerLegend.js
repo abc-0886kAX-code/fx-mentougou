@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 16:35:53
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 16:39:28
+ * @LastEditTime: 2023-04-17 11:19:40
  * @Description:
  */
 import { defineStore } from "pinia";
@@ -13,20 +13,21 @@ export const Namespace = "useLayerLegend";
 export const useLayerLegend = defineStore(Namespace, {
     state: () => ({
         checkList: [],
+        group: [],
     }),
 
     getters: {
         isHasLayer() {
-            return this.checkList.length > 0;
+            return this.group.length > 0;
         },
     },
 
     actions: {
         setCheckList(layer) {
-            this.checkList = layer;
+            this.group = layer;
         },
         clearCheckList() {
-            this.checkList = [];
+            this.group = [];
         },
     },
 });
