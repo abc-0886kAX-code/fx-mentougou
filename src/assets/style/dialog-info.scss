@@ -1,0 +1,41 @@
+.biz-info {
+    width: 100%;
+
+    // height: 100%;
+    & .introduce-box {
+        width: 25%;
+        height: 100px;
+        overflow: auto;
+        float: left;
+    }
+
+    & .introduce-query h4,
+    & .introduce-box h4 {
+        color: #fff;
+        font-weight: 700;
+        padding-left: 22px;
+        position: relative;
+        font-size: 16px;
+        margin-bottom: 13px;
+        letter-spacing: 3px;
+    }
+
+    & .introduce-query h4::after,
+    & .introduce-box h4::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 0px;
+        height: 16px;
+        width: 5px;
+        background-color: #85dbf8;
+        border-radius: 10px;
+    }
+
+    & .introduce-query p,
+    & .introduce-box p {
+        color: #e9fdfd;
+        padding-left: 10px;
+        font-size: 16px;
+    }
+}
