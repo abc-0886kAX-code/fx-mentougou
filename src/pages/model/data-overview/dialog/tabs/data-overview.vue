@@ -29,13 +29,13 @@ const config = computed(() => unref(dialog.config));
     &-video {
         height: 100%;
         width: 47%;
-        border: 1px solid red;
     }
     &-info {
         display: flex;
         flex-direction: column;
         align-items: self-end;
         justify-content: center;
+        font-size: 18px;
         &-pond,
         &-led {
             width: 100%;
