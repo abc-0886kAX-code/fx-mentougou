@@ -1,3 +1,11 @@
+<!--
+ * @FilePath: \fx-mentougou\src\pages\model\real-time-monitor\index.vue
+ * @Author: zhangxin
+ * @Date: 2023-04-14 14:46:52
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-04-18 17:50:05
+ * @Description:
+-->
 <script setup>
 import Menu from "./real-time-monitor-menu.js";
 import { useWatchRevert } from "@/biz/ScrrenGrid/usecase/useWatchRevert";
