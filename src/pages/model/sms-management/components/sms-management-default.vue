@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:54:38
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:27:51
+ * @LastEditTime: 2023-04-26 17:51:25
  * @Description:
 -->
 <script setup>
@@ -46,6 +46,10 @@ const menus = ref([
     },
 ]);
 
+function setActive(cell) {
+    return cell.keyword === unref(active).keyword ? { color: "#70b5ff", background: "#ecf5ff" } : {};
+}
+
 function handleCommand(command) {
     if (command.keyword === unref(active).keyword) return;
     active.value = command;
@@ -75,7 +79,7 @@ onMounted(() => {
                 <el-button size="mini" type="primary"> {{ menu.label || menu.defaultLabel }}<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                 <el-dropdown-menu slot="dropdown">
                     <template v-for="child in menu.children">
-                        <el-dropdown-item :command="{ ...child, index }" :key="child.keyword">{{ child.label }}</el-dropdown-item>
+                        <el-dropdown-item :style="setActive(child)" :command="{ ...child, index }" :key="child.keyword">{{ child.label }}</el-dropdown-item>
                     </template>
                 </el-dropdown-menu>
             </el-dropdown>
