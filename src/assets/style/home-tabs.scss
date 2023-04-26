@@ -1,0 +1,14 @@
+:deep(.el-tabs--left) {
+    width: 100% !important;
+    height: 100% !important;
+    color: #fff !important;
+}
+:deep(.el-tabs__item) {
+    color: #fff !important;
+}
+:deep(.el-tabs__item:hover) {
+    color: #409eff !important;
+}
+:deep(.is-active) {
+    color: #409eff !important;
+}
