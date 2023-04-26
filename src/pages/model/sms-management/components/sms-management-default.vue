@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:54:38
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:14:26
+ * @LastEditTime: 2023-04-26 17:27:51
  * @Description:
 -->
 <script setup>
@@ -87,6 +87,7 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
+@import "@/assets/style/home-table.scss";
 @import "@/assets/style/home-tabs.scss";
 .sms-management-default {
     width: 100%;

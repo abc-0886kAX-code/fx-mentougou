@@ -1,0 +1,21 @@
+{
+    "msg": "success",
+    "total": 2,
+    "code": 200,
+    "data": [
+        {
+            "id": "9c48a7426cea43fba4cef4e4356f0f7d",
+            "name": "张三",
+            "phone": "17333443333",
+            "company": "门头沟水务局",
+            "type": "日常养护"
+        },
+        {
+            "id": "566bfc9a45de48beb1e5206c81977d3d",
+            "name": "李四",
+            "phone": "17333443333",
+            "company": "门头沟水务局",
+            "type": "维保"
+        }
+    ]
+}
