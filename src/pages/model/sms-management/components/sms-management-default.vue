@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:54:38
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:11:43
+ * @LastEditTime: 2023-04-26 17:14:26
  * @Description:
 -->
 <script setup>
@@ -18,6 +18,7 @@ const menus = ref([
                 keyword: "sms-template",
                 label: "短信模板",
                 component: () => import("./tabs/sms-template.vue"),
+                index: 0,
             },
             {
                 keyword: "director-manage",
