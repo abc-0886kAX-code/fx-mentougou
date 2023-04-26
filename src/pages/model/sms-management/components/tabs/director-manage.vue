@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:47:39
+ * @LastEditTime: 2023-04-26 17:59:34
  * @Description:
 -->
 <script setup>
@@ -69,7 +69,7 @@ onBeforeUnmount(() => {
         <el-table-column type="selection" width="55"> </el-table-column>
         <el-table-column label="操作" width="80" align="center">
             <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.row)">修改</el-button>
+                <el-link type="warning" @click="handleEdit(scope.row)">修改</el-link>
             </template>
         </el-table-column>
         <template v-for="item in tableColumn">
@@ -83,5 +83,29 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+}
+
+:deep(.el-table__body-wrapper::-webkit-scrollbar) {
+    width: 6px;
+    height: 6px;
+}
+
+:deep(.el-table__body-wrapper::-webkit-scrollbar-track) {
+    width: 6px;
+    background: rgba(#98d9ff, 0.1);
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb) {
+    background-color: rgba(#98d9ff, 0.5);
+    background-clip: padding-box;
+    min-height: 28px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb:hover) {
+    background-color: rgba(#98d9ff, 1);
 }
 </style>

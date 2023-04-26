@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:35:36
+ * @LastEditTime: 2023-04-26 17:54:27
  * @Description:
 -->
 <script setup>
@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
         <el-table-column type="index" width="50" align="center"> </el-table-column>
         <el-table-column label="操作" width="80" align="center">
             <template slot-scope="scope">
-                <el-button size="mini" @click="handleEdit(scope.row)">修改</el-button>
+                <el-link type="warning" @click="handleEdit(scope.row)">修改</el-link>
             </template>
         </el-table-column>
         <template v-for="item in tableColumn">
