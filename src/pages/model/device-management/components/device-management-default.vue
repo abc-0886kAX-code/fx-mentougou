@@ -3,21 +3,22 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:55:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 14:03:37
+ * @LastEditTime: 2023-04-27 14:22:54
  * @Description:
 -->
 <script setup>
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
+import { Notification } from "element-ui";
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
 import { DeviceManage_Obtain, DeviceManage_Server } from "../server/device-management";
+import { Del_Server, Del_Obtain } from "../server/device-management/del";
 
 const popup = usePopup();
 const popupEntity = popup.define({
-    width: "40%",
-    height: "50vh",
+    width: "60%",
+    height: "80vh",
     template: defineComponent(() => import("../dialog/dialog-device-management.vue")),
-    title: "修改",
     afterClose: executeQuery,
 });
 
@@ -41,10 +42,30 @@ const tableColumn = [
     },
 ];
 
+function handleAdd() {
+    popupEntity.setupTitle("新增");
+    popupEntity.show({});
+}
 function handleEdit(rows) {
+    popupEntity.setupTitle("修改");
     popupEntity.show(rows);
 }
-function handleDel(rows) {
+async function handleDel({ id }) {
+    if (!id) return;
+    const data = await Del_Obtain({ id });
+    if (data.code === 200) {
+        Notification.success({
+            title: "成功!",
+            message: "删除成功!",
+        });
+        executeQuery();
+    } else {
+        Notification.error({
+            title: "错误!",
+            message: data.msg,
+        });
+    }
+
     // 删除操作
 }
 
@@ -63,7 +84,7 @@ onBeforeUnmount(() => {
 <template>
     <div class="device-management-default">
         <div class="device-management-default-head">
-            <el-button class="device-management-default-head-item" size="mini" plain icon="" type="primary">新增设备</el-button>
+            <el-button class="device-management-default-head-item" size="mini" plain icon="" type="primary" @click="handleAdd">新增设备</el-button>
         </div>
         <el-table class="device-management-default-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
