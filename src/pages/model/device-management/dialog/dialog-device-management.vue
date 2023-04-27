@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 14:23:43
+ * @LastEditTime: 2023-04-27 15:13:46
  * @Description:
 -->
 <script setup>
@@ -19,10 +19,23 @@ const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
-const form = ref({
+const form = reactive({
     name: "",
     type: "",
     id: "",
+    model: "",
+    specs: "",
+    price: 0,
+    mill: "",
+    supplier: "",
+    director: "",
+    phone: "",
+    buyTime: "",
+    activationTime: "",
+    service: "",
+    scrap: "",
+    depreciation: "",
+    amount: 0,
 });
 
 const rules = {
@@ -47,6 +60,27 @@ const rules = {
             trigger: "blur",
         },
     ],
+    activationTime: [
+        {
+            required: true,
+            message: "启用时间不可为空",
+            trigger: "change",
+        },
+    ],
+    service: [
+        {
+            required: true,
+            message: "保养周期不可为空",
+            trigger: "blur",
+        },
+    ],
+    scrap: [
+        {
+            required: true,
+            message: "报废周期不可为空",
+            trigger: "blur",
+        },
+    ],
 };
 
 function onModify() {
@@ -68,14 +102,32 @@ function onModify() {
     });
 }
 
+function tomapper(body) {
+    form.name = get(body, "name", "");
+    form.type = get(body, "type", "");
+    form.id = get(body, "id", "");
+    form.model = get(body, "model", "");
+    form.specs = get(body, "specs", "");
+    form.price = get(body, "price", 0);
+    form.mill = get(body, "mill", "");
+    form.supplier = get(body, "supplier", "");
+    form.director = get(body, "director", "");
+    form.phone = get(body, "phone", "");
+    form.buyTime = get(body, "buyTime", "");
+    form.activationTime = get(body, "activationTime", "");
+    form.service = get(body, "service", "");
+    form.scrap = get(body, "scrap", "");
+    form.depreciation = get(body, "depreciation", "");
+    form.amount = get(body, "amount", 0);
+}
+
 onMounted(() => {
-    if (isEmptyObject(unref(config))) return;
-    form.value = unref(config);
+    tomapper(unref(config));
 });
 </script>
 
 <template>
-    <el-form class="dialog-device-management" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="left">
+    <el-form class="dialog-device-management" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="left" label-width="115px">
         <el-row :gutter="20">
             <el-col :span="12">
                 <el-form-item prop="name" label="设备编码"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备编码" v-model="form.id"></el-input> </el-form-item
@@ -86,7 +138,7 @@ onMounted(() => {
         </el-row>
         <el-row :gutter="20">
             <el-col :span="24">
-                <el-form-item prop="name" label="设备编码"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备编码" v-model="form.id"></el-input> </el-form-item
+                <el-form-item label="设备型号"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备型号" v-model="form.model"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
@@ -96,63 +148,65 @@ onMounted(() => {
                 </el-form-item>
             </el-col>
             <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
+                ><el-form-item label="设备规格"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备规格" v-model="form.specs"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
+                <el-form-item label="设备单价(元)">
+                    <el-input-number v-model.number="form.price" controls-position="right"></el-input-number>
                 </el-form-item>
             </el-col>
             <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
+                ><el-form-item label="生产厂家"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入生产厂家" v-model="form.mill"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
+                <el-form-item label="供应商">
+                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入供应商" v-model="form.supplier"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
+                ><el-form-item label="负责人"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入负责人" v-model="form.director"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
+                <el-form-item label="联系电话">
+                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入联系电话" v-model="form.phone"></el-input>
+                </el-form-item>
+            </el-col>
+            <el-col :span="12">
+                <el-form-item label="购买时间">
+                    <el-date-picker v-model="form.buyTime" type="datetime" placeholder="请选择购买时间"> </el-date-picker>
+                </el-form-item>
+            </el-col>
+        </el-row>
+        <el-row :gutter="20">
+            <el-col :span="12">
+                <el-form-item prop="activationTime" label="启用时间">
+                    <el-date-picker v-model="form.activationTime" type="datetime" placeholder="请选择启用时间"> </el-date-picker>
                 </el-form-item>
             </el-col>
             <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
+                ><el-form-item prop="service" label="保养周期(月）"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入保养周期" v-model="form.service"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
+                <el-form-item prop="scrap" label="报废周期(年)">
+                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入报废周期" v-model="form.scrap"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
+                ><el-form-item label="折旧年限(年)"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入折旧年限" v-model="form.depreciation"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
-                </el-form-item>
-            </el-col>
-            <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
-            ></el-col>
-        </el-row>
-        <el-row :gutter="20">
-            <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
+                <el-form-item label="设备数量">
+                    <el-input-number v-model.number="form.amount" controls-position="right"></el-input-number>
                 </el-form-item>
             </el-col>
         </el-row>
