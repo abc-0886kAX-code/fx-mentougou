@@ -1,0 +1,31 @@
+{
+    "msg": "success",
+    "total": 3,
+    "code": 200,
+    "data": [
+        {
+            "id": "9c48a7426cea43fba4cef4e4356f0f7d",
+            "gate": "h<0.15",
+            "warnInfo": "前方积水x.xx米,注意安全",
+            "color": "绿"
+        },
+        {
+            "id": "0cfaaab161aa4946ab26360b6857c60d",
+            "gate": "0.15<=h<0.4",
+            "warnInfo": "前方积水x.xx米,注意安全",
+            "color": "黄"
+        },
+        {
+            "id": "a22ae63851cb42b694663742f9c9490c",
+            "gate": "0.18<=h<0.4",
+            "warnInfo": "前方积水x.xx米,注意安全",
+            "color": "橙"
+        },
+        {
+            "id": "fbbb9a2a260947f29e32ba2e9027dc1b",
+            "gate": "h>=0.4",
+            "warnInfo": "前方积水x.xx米,注意安全",
+            "color": "红"
+        }
+    ]
+}

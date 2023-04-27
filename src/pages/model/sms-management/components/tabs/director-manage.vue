@@ -3,12 +3,13 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 11:08:36
+ * @LastEditTime: 2023-04-27 13:03:20
  * @Description:
 -->
 <script setup>
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
+import { Notification } from "element-ui";
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
 import { DirectorManage_Obtain, DirectorManage_Server } from "../../server/director-manage";
 import { Select_Obtain, Select_Server } from "../../server/director-manage/select";
@@ -55,7 +56,17 @@ function handleEdit(rows) {
 async function handleSelectionChange(selectRows) {
     const selcetIds = selectRows.map((item) => item.id).join(",");
     const data = await Select_Obtain({ ids: selcetIds });
-    console.log(data);
+    if (data.code === 200) {
+        Notification.success({
+            title: "成功!",
+            message: "绑定成功!",
+        });
+    } else {
+        Notification.error({
+            title: "错误!",
+            message: data.msg,
+        });
+    }
 }
 // TODO:控制是否可以勾选
 function handleSelectable(row, index) {
