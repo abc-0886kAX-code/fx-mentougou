@@ -1,0 +1,22 @@
+{
+    "msg": "success",
+    "total": 3,
+    "code": 200,
+    "data": [
+        {
+            "id": "af8a7cb0254b48c4a9acbe19486e9055",
+            "name": "设备1",
+            "type": "雷达水位计"
+        },
+        {
+            "id": "66e4061266c64fdca6af16775101f066",
+            "name": "设备2",
+            "type": "监控摄像头"
+        },
+        {
+            "id": "07f433c5e7f24eed9d1304a989cbd9d0",
+            "name": "设备3",
+            "type": "未知"
+        }
+    ]
+}
