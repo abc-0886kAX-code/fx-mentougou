@@ -1,3 +1,11 @@
+<!--
+ * @FilePath: \fx-mentougou\src\pages\model\statistical-analysis\dialog\tabs\data-table.vue
+ * @Author: zhangxin
+ * @Date: 2023-04-25 15:25:15
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-04-27 16:21:47
+ * @Description:
+-->
 <script setup>
 import { useDialog } from "@/biz/Popup/usecase/useDialog";
 import { loadStyle } from "@/biz/share/entify/Load";
@@ -18,8 +26,7 @@ const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
 
 async function executeQuery() {
-    console.log(unref(config));
-    await ChartData_Obtain();
+    await ChartData_Obtain(unref(config));
 }
 
 onMounted(() => {

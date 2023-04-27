@@ -1,3 +1,11 @@
+<!--
+ * @FilePath: \fx-mentougou\src\pages\model\data-overview\dialog\tabs\data-table.vue
+ * @Author: zhangxin
+ * @Date: 2023-04-17 15:00:13
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-04-27 16:12:24
+ * @Description:
+-->
 <script setup>
 import { useDialog } from "@/biz/Popup/usecase/useDialog";
 import { loadStyle } from "@/biz/share/entify/Load";
@@ -27,13 +35,21 @@ const config = computed(() => unref(dialog.config));
 
 const dateVal = useDateWater();
 
+const params = computed(() => {
+    return {
+        starttime: unref(dateVal)[0],
+        endtime: unref(dateVal)[1],
+        stcd: unref(config).stcd,
+    };
+});
+
 async function executeQuery() {
-    await ChartData_Obtain();
+    await ChartData_Obtain(unref(params));
 }
 
 async function executeReset() {
     dateVal.value = useDateWater();
-    await ChartData_Obtain();
+    executeQuery();
 }
 
 onMounted(() => {

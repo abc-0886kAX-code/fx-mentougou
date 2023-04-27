@@ -107,14 +107,22 @@ function setupOptions() {
 
 const dateVal = useDateWater();
 
+const params = computed(() => {
+    return {
+        starttime: unref(dateVal)[0],
+        endtime: unref(dateVal)[1],
+        stcd: unref(config).stcd,
+    };
+});
+
 async function executeQuery() {
-    await ChartData_Obtain();
+    await ChartData_Obtain(unref(params));
     setupOptions();
 }
 
 async function executeReset() {
     dateVal = useDateWater();
-    await ChartData_Obtain();
+    executeQuery();
 }
 
 onMounted(() => {

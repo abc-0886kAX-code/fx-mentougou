@@ -111,8 +111,7 @@ function setupOptions() {
 }
 
 async function executeQuery() {
-    console.log(unref(config));
-    await ChartData_Obtain();
+    await ChartData_Obtain(unref(config));
     setupOptions();
 }
 
