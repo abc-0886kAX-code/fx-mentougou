@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 15:13:46
+ * @LastEditTime: 2023-04-27 17:09:19
  * @Description:
 -->
 <script setup>
@@ -130,7 +130,7 @@ onMounted(() => {
     <el-form class="dialog-device-management" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="left" label-width="115px">
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="name" label="设备编码"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备编码" v-model="form.id"></el-input> </el-form-item
+                <el-form-item prop="id" label="设备编码"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备编码" v-model="form.id"></el-input> </el-form-item
             ></el-col>
             <el-col :span="12"
                 ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item

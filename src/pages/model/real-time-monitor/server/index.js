@@ -3,7 +3,7 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-18 17:57:29
+ * @LastEditTime: 2023-04-27 17:30:11
  * @Description:
  */
 import { Address, Method } from "./config";
@@ -19,12 +19,16 @@ function transResponse(response) {
             position: "门头沟",
             visualangle: "南向北",
             state: "在线",
+            lttd: "32.235899",
+            lgtd: "118.359936",
         },
         {
             stnm: "监控点2",
             position: "门头沟",
             visualangle: "东向西",
             state: "在线",
+            lttd: "32.24471",
+            lgtd: "118.37734",
         },
     ];
     return { data };

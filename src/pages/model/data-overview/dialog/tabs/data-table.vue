@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 15:00:13
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 16:12:24
+ * @LastEditTime: 2023-04-27 17:36:53
  * @Description:
 -->
 <script setup>
@@ -51,6 +51,9 @@ async function executeReset() {
     dateVal.value = useDateWater();
     executeQuery();
 }
+function executeExport() {
+    console.log(unref(params));
+}
 
 onMounted(() => {
     executeQuery();
@@ -64,6 +67,7 @@ onMounted(() => {
             <div>
                 <el-button size="mini" type="primary" @click="executeQuery">查询</el-button>
                 <el-button size="mini" type="danger" @click="executeReset">重置</el-button>
+                <el-button size="mini" type="warning" @click="executeExport">导出</el-button>
             </div>
         </div>
         <el-table class="data-table-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="source">
