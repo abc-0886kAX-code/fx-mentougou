@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:54:27
+ * @LastEditTime: 2023-04-27 10:32:21
  * @Description:
 -->
 <script setup>
@@ -14,9 +14,11 @@ import { SMS_Obtain, SMS_Server } from "../../server/sms-template";
 
 const popup = usePopup();
 const popupEntity = popup.define({
-    width: "70%",
+    width: "40%",
+    height: "40vh",
     template: defineComponent(() => import("../../dialog/dialog-sms-template.vue")),
     title: "修改",
+    afterClose: executeQuery,
 });
 
 const { loading } = SMS_Server.server;

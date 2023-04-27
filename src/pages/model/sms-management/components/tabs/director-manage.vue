@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-26 17:59:34
+ * @LastEditTime: 2023-04-27 11:08:36
  * @Description:
 -->
 <script setup>
@@ -11,15 +11,19 @@ import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
 import { DirectorManage_Obtain, DirectorManage_Server } from "../../server/director-manage";
+import { Select_Obtain, Select_Server } from "../../server/director-manage/select";
 
 const popup = usePopup();
 const popupEntity = popup.define({
-    width: "70%",
+    width: "40%",
+    height: "50vh",
     template: defineComponent(() => import("../../dialog/dialog-director-manage.vue")),
     title: "修改",
+    afterClose: executeQuery,
 });
 
 const { loading } = DirectorManage_Server.server;
+const table = ref(null);
 const tableData = computed(() => transArray(unref(DirectorManage_Server.server.result.source).data, []));
 const tableColumn = [
     {
@@ -47,12 +51,22 @@ const tableColumn = [
 function handleEdit(rows) {
     popupEntity.show(rows);
 }
-function handleSelectionChange(val) {
-    console.log(val);
+// TODO:选中某行
+async function handleSelectionChange(selectRows) {
+    const selcetIds = selectRows.map((item) => item.id).join(",");
+    const data = await Select_Obtain({ ids: selcetIds });
+    console.log(data);
+}
+// TODO:控制是否可以勾选
+function handleSelectable(row, index) {
+    return true;
 }
 
 async function executeQuery() {
     await DirectorManage_Obtain();
+    unref(tableData).map((item) => {
+        item.check ? unref(table).toggleRowSelection(item, true) : unref(table).toggleRowSelection(item, false);
+    });
 }
 onMounted(() => {
     executeQuery();
@@ -64,9 +78,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="director-manage" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @selection-change="handleSelectionChange">
-        <el-table-column type="index" width="50" align="center"> </el-table-column>
-        <el-table-column type="selection" width="55"> </el-table-column>
+    <el-table class="director-manage" ref="table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @selection-change="handleSelectionChange">
+        <el-table-column fixed="left" type="selection" :selectable="handleSelectable" width="55"> </el-table-column>
         <el-table-column label="操作" width="80" align="center">
             <template slot-scope="scope">
                 <el-link type="warning" @click="handleEdit(scope.row)">修改</el-link>

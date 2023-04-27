@@ -8,14 +8,16 @@
             "name": "张三",
             "phone": "17333443333",
             "company": "门头沟水务局",
-            "type": "日常养护"
+            "type": "日常养护",
+            "check": true
         },
         {
             "id": "566bfc9a45de48beb1e5206c81977d3d",
             "name": "李四",
             "phone": "17333443333",
             "company": "门头沟水务局",
-            "type": "维保"
+            "type": "维保",
+            "check": false
         }
     ]
 }
