@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 15:00:13
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 17:36:53
+ * @LastEditTime: 2023-04-27 17:59:38
  * @Description:
 -->
 <script setup>
@@ -61,7 +61,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="data-table">
+    <div class="data-table" v-loading="loading" v-bind="loadStyle">
         <div class="data-table-form">
             <el-date-picker v-model="dateVal" size="mini" type="datetimerange" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
             <div>
@@ -70,7 +70,7 @@ onMounted(() => {
                 <el-button size="mini" type="warning" @click="executeExport">导出</el-button>
             </div>
         </div>
-        <el-table class="data-table-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="source">
+        <el-table class="data-table-body" size="mini" :data="source">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
             <template v-for="item in tableColumn">
                 <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
