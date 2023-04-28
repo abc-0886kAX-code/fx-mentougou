@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 14:59:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 11:18:07
+ * @LastEditTime: 2023-04-28 11:31:07
  * @Description:
 -->
 <script setup>
@@ -18,8 +18,8 @@ const config = computed(() => unref(dialog.config));
 <template>
     <div class="data-overview">
         <div class="data-overview-info">
-            <div class="data-overview-info-pond">当前积水水位:{{ config.z }}米</div>
-            <div class="data-overview-info-led">LED屏当前内容:前方积水{{ config.z }}米,注意安全</div>
+            <div class="data-overview-info-pond">当前积水水位: {{ config.z }} 米</div>
+            <div class="data-overview-info-led">LED屏当前内容: 前方积水 {{ config.z }} 米 , 注意安全</div>
         </div>
         <div class="data-overview-video">
             <video class="data-overview-video-item" src="/mp4/login-video.mp4" type="video/mp4" controls autoplay loop muted />
