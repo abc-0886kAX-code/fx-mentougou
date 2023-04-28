@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:21:32
+ * @LastEditTime: 2023-04-28 11:08:58
  * @Description:
 -->
 <script setup>
@@ -28,7 +28,7 @@ const tableColumn = [
         prop: "gate",
         label: "闸值",
         align: "center",
-        width: 60,
+        width: 100,
     },
     {
         prop: "color",
@@ -39,6 +39,7 @@ const tableColumn = [
         prop: "warnInfo",
         label: "警示信息",
         align: "center",
+        width: 110,
     },
 ];
 
@@ -59,7 +60,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="info-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData">
+    <el-table class="info-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
         <el-table-column type="index" width="50" align="center"> </el-table-column>
         <el-table-column label="操作" width="80" align="center">
             <template slot-scope="scope">

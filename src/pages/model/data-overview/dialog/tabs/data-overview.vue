@@ -1,3 +1,11 @@
+<!--
+ * @FilePath: \fx-mentougou\src\pages\model\data-overview\dialog\tabs\data-overview.vue
+ * @Author: zhangxin
+ * @Date: 2023-04-17 14:59:52
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-04-28 11:18:07
+ * @Description:
+-->
 <script setup>
 import { useDialog } from "@/biz/Popup/usecase/useDialog";
 const props = defineProps({
@@ -14,7 +22,10 @@ const config = computed(() => unref(dialog.config));
             <div class="data-overview-info-led">LED屏当前内容:前方积水{{ config.z }}米,注意安全</div>
         </div>
         <div class="data-overview-video">
-            <video src="/mp4/header-video.mp4" type="video/mp4" autoplay loop muted />
+            <video class="data-overview-video-item" src="/mp4/login-video.mp4" type="video/mp4" controls autoplay loop muted />
+            <video class="data-overview-video-item" src="/mp4/header-video.mp4" type="video/mp4" controls autoplay loop muted />
+            <video class="data-overview-video-item" src="/mp4/header-video.mp4" type="video/mp4" controls autoplay loop muted />
+            <video class="data-overview-video-item" src="/mp4/login-video.mp4" type="video/mp4" controls autoplay loop muted />
         </div>
     </div>
 </template>
@@ -41,6 +52,16 @@ const config = computed(() => unref(dialog.config));
             width: 100%;
             height: 47%;
             color: #fff;
+        }
+    }
+    &-video {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        &-item {
+            width: 48%;
+            height: 48%;
         }
     }
 }

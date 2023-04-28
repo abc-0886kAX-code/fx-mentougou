@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:55:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 15:28:03
+ * @LastEditTime: 2023-04-28 11:09:26
  * @Description:
 -->
 <script setup>
@@ -29,6 +29,7 @@ const tableColumn = [
         prop: "id",
         label: "设备编号",
         align: "center",
+        width: 100,
     },
     {
         prop: "name",
@@ -88,7 +89,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="device-management-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData">
+    <el-table class="device-management-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
         <el-table-column type="index" width="60" align="center">
             <template slot="header" slot-scope="scope">
                 <el-link type="success" @click="handleAdd">新增</el-link>

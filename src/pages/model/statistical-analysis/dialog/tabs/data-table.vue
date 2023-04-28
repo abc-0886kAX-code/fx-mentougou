@@ -39,7 +39,7 @@ onMounted(() => {
         <div class="data-table-console">
             <el-button type="primary" size="mini">导出<i class="el-icon-upload el-icon--right"></i></el-button>
         </div>
-        <el-table class="data-table-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="source.tableRows">
+        <el-table class="data-table-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="source.tableRows" width="100%" height="100%">
             <el-table-column width="150" prop="tm" align="center"> </el-table-column>
             <template v-for="(item, index) in source.tableColumn">
                 <el-table-column :key="index" :label="item.label" align="center">

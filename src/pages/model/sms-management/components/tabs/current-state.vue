@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:11:11
+ * @LastEditTime: 2023-04-28 10:27:57
  * @Description:
 -->
 <script setup>
@@ -34,7 +34,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <el-table class="current-state" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData">
+    <el-table class="current-state" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
         <el-table-column type="index" width="50" align="center"> </el-table-column>
         <template v-for="item in tableColumn">
             <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>

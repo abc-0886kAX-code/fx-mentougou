@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:03:20
+ * @LastEditTime: 2023-04-28 11:01:33
  * @Description:
 -->
 <script setup>
@@ -89,8 +89,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="director-manage" ref="table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @selection-change="handleSelectionChange">
-        <el-table-column fixed="left" type="selection" :selectable="handleSelectable" width="55"> </el-table-column>
+    <el-table class="director-manage" ref="table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" :selectable="handleSelectable" width="55"> </el-table-column>
         <el-table-column label="操作" width="80" align="center">
             <template slot-scope="scope">
                 <el-link type="warning" @click="handleEdit(scope.row)">修改</el-link>
@@ -106,30 +106,7 @@ onBeforeUnmount(() => {
 .director-manage {
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-}
-
-:deep(.el-table__body-wrapper::-webkit-scrollbar) {
-    width: 6px;
-    height: 6px;
-}
-
-:deep(.el-table__body-wrapper::-webkit-scrollbar-track) {
-    width: 6px;
-    background: rgba(#98d9ff, 0.1);
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-}
-:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb) {
-    background-color: rgba(#98d9ff, 0.5);
-    background-clip: padding-box;
-    min-height: 28px;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-}
-:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb:hover) {
-    background-color: rgba(#98d9ff, 1);
+    // overflow-y: auto;
+    overflow: hidden;
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 10:32:21
+ * @LastEditTime: 2023-04-28 10:27:23
  * @Description:
 -->
 <script setup>
@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="sms-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData">
+    <el-table class="sms-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
         <el-table-column type="index" width="50" align="center"> </el-table-column>
         <el-table-column label="操作" width="80" align="center">
             <template slot-scope="scope">

@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 15:00:13
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 17:59:38
+ * @LastEditTime: 2023-04-28 11:14:24
  * @Description:
 -->
 <script setup>
@@ -70,7 +70,7 @@ onMounted(() => {
                 <el-button size="mini" type="warning" @click="executeExport">导出</el-button>
             </div>
         </div>
-        <el-table class="data-table-body" size="mini" :data="source">
+        <el-table class="data-table-body" size="mini" :data="source" width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
             <template v-for="item in tableColumn">
                 <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
@@ -99,5 +99,32 @@ onMounted(() => {
         width: 100%;
         overflow-y: auto;
     }
+}
+:deep(.el-table th.gutter) {
+    width: 6px !important;
+}
+
+:deep(.el-table__body-wrapper::-webkit-scrollbar) {
+    width: 6px;
+    height: 6px;
+}
+
+:deep(.el-table__body-wrapper::-webkit-scrollbar-track) {
+    width: 6px;
+    background: rgba(#98d9ff, 0.1);
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb) {
+    background-color: rgba(#98d9ff, 0.5);
+    background-clip: padding-box;
+    min-height: 28px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb:hover) {
+    background-color: rgba(#98d9ff, 1);
 }
 </style>

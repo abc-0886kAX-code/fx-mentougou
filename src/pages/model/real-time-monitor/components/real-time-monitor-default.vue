@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
             <div class="real-time-monitor-default-stat-total">监控总数 4</div>
             <div class="real-time-monitor-default-stat-state">在线 4 - 离线 0</div>
         </div>
-        <el-table class="real-time-monitor-default-table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow">
+        <el-table class="real-time-monitor-default-table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow" width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
             <template v-for="item in tableColumn">
                 <el-table-column v-if="item.prop === 'stnm'" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align">

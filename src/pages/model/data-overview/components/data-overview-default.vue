@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-17 14:37:45
+ * @LastEditTime: 2023-04-28 11:24:07
  * @Description:
 -->
 <script setup>
@@ -32,11 +32,13 @@ const tableColumn = [
         prop: "stnm",
         label: "名称",
         align: "center",
+        width: 220,
     },
     {
         prop: "signname",
         label: "站点类型",
         align: "center",
+        width: 150,
     },
 ];
 
@@ -198,7 +200,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="data-overview-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow">
+    <el-table class="data-overview-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow" width="100%" height="100%">
         <el-table-column type="index" width="50" align="center"> </el-table-column>
         <template v-for="item in tableColumn">
             <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>

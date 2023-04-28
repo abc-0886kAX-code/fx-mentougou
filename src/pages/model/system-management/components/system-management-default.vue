@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:55:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 10:07:45
+ * @LastEditTime: 2023-04-28 10:52:25
  * @Description:
 -->
 <script setup>
@@ -93,7 +93,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="system-management-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData">
+    <el-table class="system-management-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
         <el-table-column type="index" width="60" align="center">
             <template slot="header" slot-scope="scope">
                 <el-link type="success" @click="handleAdd">新增</el-link>
@@ -116,29 +116,6 @@ onBeforeUnmount(() => {
 .system-management-default {
     width: 100%;
     height: 100%;
-}
-
-:deep(.el-table__body-wrapper::-webkit-scrollbar) {
-    width: 6px;
-    height: 6px;
-}
-
-:deep(.el-table__body-wrapper::-webkit-scrollbar-track) {
-    width: 6px;
-    background: rgba(#98d9ff, 0.1);
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-}
-:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb) {
-    background-color: rgba(#98d9ff, 0.5);
-    background-clip: padding-box;
-    min-height: 28px;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-}
-:deep(.el-table__body-wrapper::-webkit-scrollbar-thumb:hover) {
-    background-color: rgba(#98d9ff, 1);
+    overflow-y: auto;
 }
 </style>
