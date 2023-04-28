@@ -1,3 +1,11 @@
+<!--
+ * @FilePath: \fx-mentougou\src\pages\model\system-management\index.vue
+ * @Author: zhangxin
+ * @Date: 2023-04-14 14:56:23
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-04-28 09:57:22
+ * @Description:
+-->
 <script setup>
 import Menu from "./system-management-menu.js";
 import { useWatchRevert } from "@/biz/ScrrenGrid/usecase/useWatchRevert";
@@ -41,4 +49,6 @@ const handlerDialog = (cell) => {};
     </screen-grid-container>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@import "@/assets/style/home-table.scss";
+</style>
