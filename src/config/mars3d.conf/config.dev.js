@@ -2,17 +2,17 @@
  * @Author: zhangyang
  * @Date: 2022-04-24 12:15:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-12 11:26:09
+ * @LastEditTime: 2023-04-28 16:23:36
  * @Description: mars3d.config.Dev
  */
 
 import { CRS } from "mars3d";
-import black_basemap from "@/assets/icon/basemap/black_basemap.png";
-import blue_basemap from "@/assets/icon/basemap/blue_basemap.png";
-import darkcolor_basemap from "@/assets/icon/basemap/darkcolor_basemap.png";
-import electronics_basemap from "@/assets/icon/basemap/electronics_basemap.png";
-import image_basemap from "@/assets/icon/basemap/image_basemap.png";
-import solidcolor_basemap from "@/assets/icon/basemap/solidcolor_basemap.png";
+import black_basemap from "@/assets/images/icon/black_basemap.png";
+import blue_basemap from "@/assets/images/icon/blue_basemap.png";
+import darkcolor_basemap from "@/assets/images/icon/darkcolor_basemap.png";
+import electronics_basemap from "@/assets/images/icon/electronics_basemap.png";
+import image_basemap from "@/assets/images/icon/image_basemap.png";
+import solidcolor_basemap from "@/assets/images/icon/solidcolor_basemap.png";
 const { VITE_CESIUMTOKEN, VITE_TIANMAPKEY, VITE_ROOT_LAYERID, VITE_OFFLINEMAP_URL, VITE_OFFLINEMAP_LEVEL } = import.meta.env;
 export default (mode = 3) => {
     const config = {

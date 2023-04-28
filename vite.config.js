@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 10:51:55
+ * @LastEditTime: 2023-04-28 16:39:53
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -104,7 +104,8 @@ export default defineConfig(({ mode }) => {
         },
         build: {
             minify: false,
-            target: "es2015",
+            target: "es2018", // 之前为es2015打包报错,以下为报错信息
+            //Transforming async generator functions to the configured target environment ("es2015" + 2 overrides)
             sourcemap: mode === "production" ? false : "hidden",
             chunkSizeWarningLimit: 500,
             assetsInlineLimit: 10000,
