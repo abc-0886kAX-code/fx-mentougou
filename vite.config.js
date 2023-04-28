@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 16:39:53
+ * @LastEditTime: 2023-04-28 16:43:57
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -106,6 +106,7 @@ export default defineConfig(({ mode }) => {
             minify: false,
             target: "es2018", // 之前为es2015打包报错,以下为报错信息
             //Transforming async generator functions to the configured target environment ("es2015" + 2 overrides)
+            // 解决文档：https://bytemeta.vip/repo/privatenumber/esbuild-loader/issues/259
             sourcemap: mode === "production" ? false : "hidden",
             chunkSizeWarningLimit: 500,
             assetsInlineLimit: 10000,
