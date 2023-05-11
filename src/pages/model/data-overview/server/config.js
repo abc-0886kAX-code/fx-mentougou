@@ -1,5 +1,13 @@
+/*
+ * @FilePath: \fx-mentougou\src\pages\model\data-overview\server\config.js
+ * @Author: zhangxin
+ * @Date: 2023-04-17 09:26:17
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-05-11 13:32:13
+ * @Description:
+ */
 // 数据总览列表
-export const Address = "/realData/getAddvcditem";
+export const Address = "/Site/getSiteInfoList";
 export const Method = "POST";
 
 // 数据总览数据图表、表格
