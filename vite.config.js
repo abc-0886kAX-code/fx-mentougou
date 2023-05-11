@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 16:43:57
+ * @LastEditTime: 2023-05-11 11:14:29
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
                     changeOrigin: true,
                     rewrite: (path) => path.replace(/^\/api/, "/api"),
                 },
-                "/FXAPI": {
+                "/Mentougou": {
                     target: VITE_BASE_URL,
                     changeOrigin: true,
                 },

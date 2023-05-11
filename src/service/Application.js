@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-24 10:05:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 10:51:10
+ * @LastEditTime: 2023-05-11 11:13:06
  * @Description:
  */
 import axios from "axios";
@@ -11,7 +11,7 @@ import { defineService } from "~/service";
 import { useTokenMiddleware } from "@/middleware/token.request";
 
 const define = axios.create({
-    baseURL: "/FXAPI",
+    baseURL: "/Mentougou",
     timeout: import.meta.env.DEV ? 0 : 30000,
 });
 
