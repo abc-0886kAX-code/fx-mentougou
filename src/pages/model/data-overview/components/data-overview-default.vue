@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 11:24:07
+ * @LastEditTime: 2023-05-11 14:13:19
  * @Description:
 -->
 <script setup>
@@ -35,7 +35,7 @@ const tableColumn = [
         width: 220,
     },
     {
-        prop: "signname",
+        prop: "sttpname",
         label: "站点类型",
         align: "center",
         width: 150,
@@ -55,16 +55,16 @@ const setupFloat = (target) => {
 };
 
 function setupRoundPoint(source) {
-    const { lgtd: longitude, lttd: latitude, stnm: name, stcd: id, sign } = source;
+    const { lgtd: longitude, lttd: latitude, stnm: name, stcd: id, sttp } = source;
     const ICON = {
-        "01": JISHUIICON,
-        "02": SHIPINGICON,
-        "03": YULIANGICON,
+        WP: JISHUIICON,
+        VD: SHIPINGICON,
+        PP: YULIANGICON,
     };
     const shape = setupBillboardShape({
         longitude,
         latitude,
-        image: ICON[sign],
+        image: ICON[sttp],
     });
 
     return new BillboardEntity({
@@ -102,19 +102,19 @@ const rainfallLayer = setupLayer({
 const { find: videoFind, clear: videoClear } = unref(gather).VideoPointLayer;
 const videoEntity = videoFind();
 const videoPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sign === "01");
+    const data = unref(tableData).filter((item) => item.sttp === "WP");
     return data.map(setupRoundPoint);
 });
 const { find: pondFind, clear: pondClear } = unref(gather).PondPointLayer;
 const pondEntity = pondFind();
 const pondPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sign === "02");
+    const data = unref(tableData).filter((item) => item.sttp === "VD");
     return data.map(setupRoundPoint);
 });
 const { find: rainfallFind, clear: rainfallClear } = unref(gather).RainfallPointLayer;
 const rainfallEntity = rainfallFind();
 const rainfallPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sign === "03");
+    const data = unref(tableData).filter((item) => item.sttp === "PP");
     return data.map(setupRoundPoint);
 });
 const { setupFloatHide, setupFloatWindow } = inject("Mars3dFloat");
@@ -141,13 +141,13 @@ const { setupBind } = useMars3dEvent({
 });
 
 function handleRow(row) {
-    const { stcd, sign } = row;
+    const { stcd, sttp } = row;
     const entity = {
-        "01": unref(gather).VideoPointLayer,
-        "02": unref(gather).PondPointLayer,
-        "03": unref(gather).RainfallPointLayer,
+        WP: unref(gather).VideoPointLayer,
+        VD: unref(gather).PondPointLayer,
+        PP: unref(gather).RainfallPointLayer,
     };
-    const { lockPosition } = useLocation(entity[sign]);
+    const { lockPosition } = useLocation(entity[sttp]);
     lockPosition(stcd);
 }
 

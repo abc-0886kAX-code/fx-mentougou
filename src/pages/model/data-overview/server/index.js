@@ -3,7 +3,7 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-17 11:08:34
+ * @LastEditTime: 2023-05-11 14:08:59
  * @Description:
  */
 import { Address, Method } from "./config";
@@ -13,8 +13,8 @@ import SITE from "@/assets/json/site.json";
 
 const service = useService();
 function transResponse(response) {
-    // const data = get(response, "data", {});
-    const data = get(SITE, "data", []);
+    const data = get(response, "data.data", []);
+    // const data = get(SITE, "data", []);
     return { data };
 }
 

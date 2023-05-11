@@ -3,16 +3,21 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 15:00:46
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-17 17:41:11
+ * @LastEditTime: 2023-05-11 14:26:26
  * @Description:
 -->
 <script setup>
 import { useDialog } from "@/biz/Popup/usecase/useDialog";
+import { Details_Server, Details_Obtain } from "../../server/details";
+import { transObject } from "~/shared/trans";
 const props = defineProps({
     popupKeyword: String,
 });
 const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
+
+const { loading } = Details_Server.server;
+const Info = computed(() => transObject(unref(Details_Server.server.result.source).data, {}));
 
 const caption = ref([
     {
@@ -36,19 +41,20 @@ const caption = ref([
         value: "",
     },
     {
-        field: "stlc",
-        label: "地址",
+        field: "addvcdname",
+        label: "行政区",
         value: "",
     },
     {
-        field: "tm",
-        label: "时间",
+        field: "sttpname",
+        label: "站点类型",
         value: "",
     },
 ]);
-function executeQuery() {
+async function executeQuery() {
+    await Details_Obtain({ stcd: unref(config).stcd });
     caption.value.forEach((item) => {
-        item.handler ? (item.value = item.handler(unref(config)[item.field])) : (item.value = unref(config)[item.field]);
+        item.handler ? (item.value = item.handler(unref(Info)[item.field])) : (item.value = unref(Info)[item.field]);
 
         return item;
     });
@@ -60,7 +66,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="data-info biz-info">
+    <div class="data-info biz-info" v-loading="loading">
         <div class="introduce-box" v-for="(item, index) in caption" :key="index">
             <h4>{{ item.label }}</h4>
             <p>{{ item.value }}</p>
