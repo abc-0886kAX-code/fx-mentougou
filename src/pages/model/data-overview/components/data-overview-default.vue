@@ -166,6 +166,7 @@ async function executeQuery() {
             entity: videoEntity,
             size: videoEntity.length,
             show: true,
+            icon: SHIPINGICON,
         },
         {
             keyword: "pond",
@@ -173,6 +174,7 @@ async function executeQuery() {
             entity: pondEntity,
             size: pondEntity.length,
             show: true,
+            icon: JISHUIICON,
         },
         {
             keyword: "rainfall",
@@ -180,6 +182,7 @@ async function executeQuery() {
             entity: rainfallEntity,
             size: rainfallEntity.length,
             show: true,
+            icon: YULIANGICON,
         },
     ]);
 }

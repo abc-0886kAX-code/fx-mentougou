@@ -1,5 +1,5 @@
-// 数据总览列表
-export const Address = "/realData/getAddvcditem";
+// 下拉列表
+export const Address = "/SiteInfo/getSiteInfoList";
 export const Method = "POST";
 
 // 数据总览数据图表、表格

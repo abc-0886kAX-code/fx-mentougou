@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-11 11:14:29
+ * @LastEditTime: 2023-05-11 17:28:34
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -42,6 +42,10 @@ export default defineConfig(({ mode }) => {
                     target: VITE_BASE_URL,
                     changeOrigin: true,
                 },
+                // "/FXAPI": {
+                //     target: VITE_BASE_URL,
+                //     changeOrigin: true,
+                // },
             },
         },
         resolve: {

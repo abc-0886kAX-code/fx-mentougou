@@ -33,7 +33,7 @@ const params = computed(() => {
 });
 
 async function executeQuery() {
-    await SelectSite_Obtain();
+    await SelectSite_Obtain({ sttp: "RW", usfl: "01" });
 }
 
 function executeReset() {
