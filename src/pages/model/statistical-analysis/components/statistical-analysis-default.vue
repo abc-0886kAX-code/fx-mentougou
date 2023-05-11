@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:46:56
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-25 15:33:59
+ * @LastEditTime: 2023-05-11 09:44:06
  * @Description:
 -->
 <script setup>
@@ -23,8 +23,7 @@ const { loading } = SelectSite_Server.server;
 const selcetOptions = computed(() => transArray(unref(SelectSite_Server.server.result.source).data, []));
 
 const selectValue = ref([]);
-const dateVal = useDateWater();
-
+const dateVal = ref(useDateWater());
 const params = computed(() => {
     return {
         stcds: unref(selectValue).join(","),
@@ -38,7 +37,7 @@ async function executeQuery() {
 }
 
 function executeReset() {
-    dateVal = useDateWater();
+    dateVal.value = useDateWater();
     selectValue.value = [];
 }
 

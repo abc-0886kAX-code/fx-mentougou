@@ -105,7 +105,7 @@ function setupOptions() {
     chart.value.setOption(options);
 }
 
-const dateVal = useDateWater();
+const dateVal = ref(useDateWater());
 
 const params = computed(() => {
     return {
@@ -121,7 +121,7 @@ async function executeQuery() {
 }
 
 async function executeReset() {
-    dateVal = useDateWater();
+    dateVal.value = useDateWater();
     executeQuery();
 }
 
