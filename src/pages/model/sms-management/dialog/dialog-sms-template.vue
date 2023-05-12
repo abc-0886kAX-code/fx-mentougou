@@ -21,7 +21,7 @@ const ModifyForm = ref();
 const form = ref({
     gate: "",
     content: "",
-    id: "",
+    tempid: "",
 });
 
 const rules = {
