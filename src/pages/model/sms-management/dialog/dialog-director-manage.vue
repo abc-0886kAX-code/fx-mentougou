@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 10:57:45
+ * @LastEditTime: 2023-05-12 17:42:43
  * @Description:
 -->
 <script setup>
@@ -19,22 +19,22 @@ const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
 const form = ref({
-    name: "",
+    username: "",
     company: "",
-    phone: "",
-    type: "",
+    telephone: "",
+    dutytype: "",
     id: "",
 });
 
 const rules = {
-    name: [
+    username: [
         {
             required: true,
             message: "负责人姓名不可为空",
             trigger: "blur",
         },
     ],
-    phone: [
+    telephone: [
         {
             required: true,
             message: "负责人手机号不可为空",
@@ -48,7 +48,7 @@ const rules = {
             trigger: "blur",
         },
     ],
-    type: [
+    dutytype: [
         {
             required: true,
             message: "负责类型不可为空",
@@ -83,20 +83,20 @@ onMounted(() => {
 
 <template>
     <el-form class="dialog-director-manage" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="top">
-        <el-form-item prop="name" label="负责人姓名">
-            <el-input type="text" prefix-icon="el-icon-remove-outline" placeholder="请输入负责人姓名" v-model="form.name"></el-input>
+        <el-form-item prop="username" label="负责人姓名">
+            <el-input type="text" prefix-icon="el-icon-remove-outline" placeholder="请输入负责人姓名" v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item prop="phone" label="负责人手机号">
-            <el-input class="numrule" type="number" prefix-icon="el-icon-phone-outline" placeholder="请输入负责人手机号" v-model.number="form.phone" :max="11"></el-input>
+        <el-form-item prop="telephone" label="负责人手机号">
+            <el-input class="numrule" type="number" prefix-icon="el-icon-phone-outline" placeholder="请输入负责人手机号" v-model.number="form.telephone" :max="11"></el-input>
         </el-form-item>
         <el-form-item prop="company" label="单位">
             <el-input type="text" prefix-icon="el-icon-office-building" placeholder="请输入单位" v-model="form.company"></el-input>
         </el-form-item>
-        <el-form-item prop="type" label="负责类型">
-            <el-input type="text" prefix-icon="el-icon-connection" placeholder="请输入负责类型" v-model="form.type"></el-input>
+        <el-form-item prop="dutytype" label="负责类型">
+            <el-input type="text" prefix-icon="el-icon-connection" placeholder="请输入负责类型" v-model="form.dutytype"></el-input>
         </el-form-item>
         <el-form-item class="dialog-director-manage-console">
-            <el-button class="dialog-director-manage-console-button" type="primary" size="mini" :loading="loading" @click="onModify">修改 </el-button>
+            <el-button class="dialog-director-manage-console-button" type="primary" size="mini" :loading="loading" @click="onModify">保存 </el-button>
         </el-form-item>
     </el-form>
 </template>

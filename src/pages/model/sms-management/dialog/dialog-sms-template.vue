@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 10:33:19
+ * @LastEditTime: 2023-05-12 17:43:09
  * @Description:
 -->
 <script setup>
@@ -74,7 +74,7 @@ onMounted(() => {
             <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4 }" prefix-icon="el-icon-reading" placeholder="请输入短信内容" v-model="form.content"></el-input>
         </el-form-item>
         <el-form-item class="dialog-sms-template-console">
-            <el-button class="dialog-sms-template-console-button" type="primary" size="mini" :loading="loading" @click="onModify">修改 </el-button>
+            <el-button class="dialog-sms-template-console-button" type="primary" size="mini" :loading="loading" @click="onModify">保存 </el-button>
         </el-form-item>
     </el-form>
 </template>
