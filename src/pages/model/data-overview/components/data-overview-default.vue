@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-11 14:13:19
+ * @LastEditTime: 2023-05-12 15:57:19
  * @Description:
 -->
 <script setup>
@@ -102,13 +102,13 @@ const rainfallLayer = setupLayer({
 const { find: videoFind, clear: videoClear } = unref(gather).VideoPointLayer;
 const videoEntity = videoFind();
 const videoPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sttp === "WP");
+    const data = unref(tableData).filter((item) => item.sttp === "VD");
     return data.map(setupRoundPoint);
 });
 const { find: pondFind, clear: pondClear } = unref(gather).PondPointLayer;
 const pondEntity = pondFind();
 const pondPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sttp === "VD");
+    const data = unref(tableData).filter((item) => item.sttp === "WP");
     return data.map(setupRoundPoint);
 });
 const { find: rainfallFind, clear: rainfallClear } = unref(gather).RainfallPointLayer;

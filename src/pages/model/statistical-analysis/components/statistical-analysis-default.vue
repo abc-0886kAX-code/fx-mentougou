@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:46:56
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-11 09:44:06
+ * @LastEditTime: 2023-05-12 15:54:38
  * @Description:
 -->
 <script setup>
@@ -26,7 +26,7 @@ const selectValue = ref([]);
 const dateVal = ref(useDateWater());
 const params = computed(() => {
     return {
-        stcds: unref(selectValue).join(","),
+        stcd: unref(selectValue).join(","),
         starttime: unref(dateVal)[0],
         endtime: unref(dateVal)[1],
     };
