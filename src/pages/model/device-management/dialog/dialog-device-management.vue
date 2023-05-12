@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 17:09:19
+ * @LastEditTime: 2023-05-12 15:44:12
  * @Description:
 -->
 <script setup>
@@ -20,47 +20,47 @@ const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
 const form = reactive({
-    name: "",
-    type: "",
-    id: "",
-    model: "",
-    specs: "",
+    devicename: null,
+    devicetype: null,
+    id: null,
+    model: null,
+    specs: null,
     price: 0,
-    mill: "",
-    supplier: "",
-    director: "",
-    phone: "",
-    buyTime: "",
-    activationTime: "",
-    service: "",
-    scrap: "",
-    depreciation: "",
+    mill: null,
+    supplier: null,
+    director: null,
+    phone: null,
+    buytime: null,
+    activationtime: null,
+    service: null,
+    scrap: null,
+    depreciation: null,
     amount: 0,
 });
 
 const rules = {
-    id: [
-        {
-            required: true,
-            message: "设备编码不可为空",
-            trigger: "blur",
-        },
-    ],
-    name: [
+    // id: [
+    //     {
+    //         required: true,
+    //         message: "设备编码不可为空",
+    //         trigger: "blur",
+    //     },
+    // ],
+    devicename: [
         {
             required: true,
             message: "设备名称不可为空",
             trigger: "blur",
         },
     ],
-    type: [
+    devicetype: [
         {
             required: true,
             message: "设备类型不可为空",
             trigger: "blur",
         },
     ],
-    activationTime: [
+    activationtime: [
         {
             required: true,
             message: "启用时间不可为空",
@@ -84,6 +84,7 @@ const rules = {
 };
 
 function onModify() {
+    console.log(unref(form));
     unref(ModifyForm).validate(async (valid) => {
         if (!valid) return;
         const data = await Modify_Obtain(unref(form));
@@ -103,21 +104,21 @@ function onModify() {
 }
 
 function tomapper(body) {
-    form.name = get(body, "name", "");
-    form.type = get(body, "type", "");
-    form.id = get(body, "id", "");
-    form.model = get(body, "model", "");
-    form.specs = get(body, "specs", "");
+    form.devicename = get(body, "devicename", null);
+    form.devicetype = get(body, "devicetype", null);
+    form.id = get(body, "id", null);
+    form.model = get(body, "model", null);
+    form.specs = get(body, "specs", null);
     form.price = get(body, "price", 0);
-    form.mill = get(body, "mill", "");
-    form.supplier = get(body, "supplier", "");
-    form.director = get(body, "director", "");
-    form.phone = get(body, "phone", "");
-    form.buyTime = get(body, "buyTime", "");
-    form.activationTime = get(body, "activationTime", "");
-    form.service = get(body, "service", "");
-    form.scrap = get(body, "scrap", "");
-    form.depreciation = get(body, "depreciation", "");
+    form.mill = get(body, "mill", null);
+    form.supplier = get(body, "supplier", null);
+    form.director = get(body, "director", null);
+    form.phone = get(body, "phone", null);
+    form.buytime = get(body, "buytime", null);
+    form.activationtime = get(body, "activationtime", null);
+    form.service = get(body, "service", null);
+    form.scrap = get(body, "scrap", null);
+    form.depreciation = get(body, "depreciation", null);
     form.amount = get(body, "amount", 0);
 }
 
@@ -130,10 +131,10 @@ onMounted(() => {
     <el-form class="dialog-device-management" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="left" label-width="115px">
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="id" label="设备编码"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备编码" v-model="form.id"></el-input> </el-form-item
+                <el-form-item prop="id" label="设备编码"> <el-input type="text" :disabled="true" prefix-icon="el-icon-edit" placeholder="请输入设备编码" v-model="form.id"></el-input> </el-form-item
             ></el-col>
             <el-col :span="12"
-                ><el-form-item prop="name" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.name"></el-input> </el-form-item
+                ><el-form-item prop="devicename" label="设备名称"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备名称" v-model="form.devicename"></el-input> </el-form-item
             ></el-col>
         </el-row>
         <el-row :gutter="20">
@@ -143,8 +144,8 @@ onMounted(() => {
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="type" label="设备类型">
-                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.type"></el-input>
+                <el-form-item prop="devicetype" label="设备类型">
+                    <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入设备类型" v-model="form.devicetype"></el-input>
                 </el-form-item>
             </el-col>
             <el-col :span="12"
@@ -179,14 +180,14 @@ onMounted(() => {
             </el-col>
             <el-col :span="12">
                 <el-form-item label="购买时间">
-                    <el-date-picker v-model="form.buyTime" type="datetime" placeholder="请选择购买时间"> </el-date-picker>
+                    <el-date-picker v-model="form.buytime" type="datetime" placeholder="请选择购买时间" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                 </el-form-item>
             </el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="activationTime" label="启用时间">
-                    <el-date-picker v-model="form.activationTime" type="datetime" placeholder="请选择启用时间"> </el-date-picker>
+                <el-form-item prop="activationtime" label="启用时间">
+                    <el-date-picker format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss" v-model="form.activationtime" type="datetime" placeholder="请选择启用时间"> </el-date-picker>
                 </el-form-item>
             </el-col>
             <el-col :span="12"

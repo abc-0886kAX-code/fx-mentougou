@@ -3,7 +3,7 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:55:26
+ * @LastEditTime: 2023-05-12 15:10:42
  * @Description:
  */
 import { Address, Method } from "./config";
@@ -13,8 +13,8 @@ import DeviceManage from "@/assets/json/device-manage.json";
 
 const service = useService();
 function transResponse(response) {
-    // const data = get(response, "data", {});
-    const data = get(DeviceManage, "data", []);
+    const data = get(response, "data.data", []);
+    // const data = get(DeviceManage, "data", []);
     return { data };
 }
 

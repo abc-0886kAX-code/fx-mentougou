@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-25 15:25:15
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 16:21:47
+ * @LastEditTime: 2023-05-12 15:06:18
  * @Description:
 -->
 <script setup>
@@ -42,8 +42,8 @@ onMounted(() => {
         <el-table class="data-table-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="source.tableRows" width="100%" height="100%">
             <el-table-column width="150" prop="tm" align="center"> </el-table-column>
             <template v-for="(item, index) in source.tableColumn">
-                <el-table-column :key="index" :label="item.label" align="center">
-                    <template v-slot="scope">{{ scope.row[item.filed] }}</template>
+                <el-table-column :key="index" :label="item.stnm" align="center">
+                    <template v-slot="scope">{{ scope.row[item.columnkey] }}</template>
                 </el-table-column>
             </template>
         </el-table>

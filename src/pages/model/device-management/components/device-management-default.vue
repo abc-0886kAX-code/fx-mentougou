@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:55:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 11:09:26
+ * @LastEditTime: 2023-05-12 15:12:23
  * @Description:
 -->
 <script setup>
@@ -32,12 +32,12 @@ const tableColumn = [
         width: 100,
     },
     {
-        prop: "name",
+        prop: "devicename",
         label: "设备名称",
         align: "center",
     },
     {
-        prop: "type",
+        prop: "devicetype",
         label: "设备类型",
         align: "center",
     },

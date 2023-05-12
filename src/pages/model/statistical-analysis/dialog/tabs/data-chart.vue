@@ -39,9 +39,9 @@ function setupOptions() {
     if (isNil(unref(chart))) createChart();
     const data = unref(source).tableColumn.map((item) => {
         return {
-            name: item.label,
+            name: item.stnm,
             yAxisIndex: 0,
-            data: unref(source).tableRows.map((cell) => cell[item.filed]),
+            data: unref(source).tableRows.map((cell) => cell[item.columnkey]),
             type: "line",
             z: 1,
         };

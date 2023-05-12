@@ -3,7 +3,7 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-25 16:18:32
+ * @LastEditTime: 2023-05-12 15:04:45
  * @Description:
  */
 import { ChartAddress, CGartMethod } from "./config";
@@ -13,8 +13,8 @@ import SITE from "@/assets/json/twodimension.json";
 
 const service = useService();
 function transResponse(response) {
-    // const data = get(response, "data", {});
-    const data = get(SITE, "data", {});
+    const data = get(response, "data.data", {});
+    // const data = get(SITE, "data", {});
     return { data };
 }
 
