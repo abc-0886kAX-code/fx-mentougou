@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-12 17:38:27
+ * @LastEditTime: 2023-05-15 10:43:37
  * @Description:
 -->
 <script setup>
@@ -83,9 +83,14 @@ async function handleDel({ id }) {
     }
 }
 // TODO:选中某行
-async function handleSelectionChange(selectRows) {
-    const selcetIds = selectRows.map((item) => item.id).join(",");
-    const data = await Select_Obtain({ ids: selcetIds });
+async function handleSelect(selection, row) {
+    const selected = selection.length && selection.indexOf(row) !== -1;
+    const params = {
+        id: row.id,
+        ischeck: selected ? "01" : "00",
+    }
+
+    const data = await Select_Obtain(params);
     if (data.code === 200) {
         Notification.success({
             title: "成功!",
@@ -120,7 +125,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="director-manage" ref="table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%" @selection-change="handleSelectionChange">
+    <el-table class="director-manage" ref="table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%" @select="handleSelect">
         <el-table-column type="selection" :selectable="handleSelectable" width="55"> </el-table-column>
         <el-table-column type="index" width="60" align="center">
             <template slot="header" slot-scope="scope">
