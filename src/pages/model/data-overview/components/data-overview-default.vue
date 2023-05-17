@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-12 15:57:19
+ * @LastEditTime: 2023-05-17 11:27:43
  * @Description:
 -->
 <script setup>
@@ -203,10 +203,20 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="data-overview-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow" width="100%" height="100%">
+    <el-table class="data-overview-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
         <el-table-column type="index" width="50" align="center"> </el-table-column>
+        <el-table-column label="操作" width="100" align="center">
+            <template slot-scope="scope">
+                <el-link type="success" @click="handlerClick({ graphic: { attr: scope.row, name: scope.row.stnm } })">查看</el-link>
+            </template>
+        </el-table-column>
         <template v-for="item in tableColumn">
-            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
+            <el-table-column v-if="item.prop === 'stnm'" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align">
+                <template slot-scope="scope">
+                    <el-link type="primary" @click="handleRow(scope.row)">{{ scope.row.stnm }}</el-link>
+                </template>
+            </el-table-column>
+            <el-table-column v-else :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
         </template>
     </el-table>
 </template>
