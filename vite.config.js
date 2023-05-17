@@ -38,6 +38,11 @@ export default defineConfig(({ mode }) => {
                     changeOrigin: true,
                     rewrite: (path) => path.replace(/^\/api/, "/api"),
                 },
+                "/zip": {
+                    target: "http://192.1.1.227:8080/",
+                    changeOrigin: true,
+                    rewrite: (path) => path.replace(/^\/zip/, ""),
+                },
                 "/Mentougou": {
                     target: VITE_BASE_URL,
                     changeOrigin: true,

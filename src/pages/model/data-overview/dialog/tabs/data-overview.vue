@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 14:59:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-17 11:17:30
+ * @LastEditTime: 2023-05-17 13:28:18
  * @Description:
 -->
 <script setup>
@@ -13,6 +13,13 @@ const props = defineProps({
 });
 const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
+
+const LEDLabel = "前方积水200米,注意安全!";
+const LEDStyle = computed(() => {
+    return {
+        width: `calc(100% + ${LEDLabel.length * 41}px)`,
+    };
+});
 </script>
 
 <template>
@@ -20,15 +27,15 @@ const config = computed(() => unref(dialog.config));
         <div class="data-overview-info">
             <el-descriptions title="信息展示" :column="1" border class="data-overview-info-pond">
                 <el-descriptions-item label="当前积水水位" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">{{ config.z }}米</el-descriptions-item>
-                <el-descriptions-item label="雨量数据" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">aaa雨量站 12mm</el-descriptions-item>
+                <el-descriptions-item label="雨量数据" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">XXX雨量站 12mm</el-descriptions-item>
             </el-descriptions>
 
             <el-card class="data-overview-info-led" :body-style="{ padding: '0px' }" shadow="always">
                 <div class="data-overview-info-led-content">
-                    <div class="data-overview-info-led-content-animation">前方积水 米 , 注意安全</div>
+                    <div class="data-overview-info-led-content-animation" :style="LEDStyle">{{ LEDLabel }}</div>
                 </div>
                 <div class="data-overview-info-led-text">
-                    <span>LED屏当前内容: 前方积水 {{ config.z }} 米 , 注意安全</span>
+                    <span>{{ LEDLabel }}</span>
                 </div>
             </el-card>
         </div>
@@ -80,8 +87,6 @@ const config = computed(() => unref(dialog.config));
             color: #fff;
             &-content {
                 height: calc(80% - 10px);
-                font-family: "微软雅黑";
-                font-size: 40px;
                 color: #ff0000;
                 text-decoration: none;
                 border: 5px ridge #999;
@@ -90,9 +95,10 @@ const config = computed(() => unref(dialog.config));
                 padding-right: 5px;
                 padding-left: 5px;
                 &-animation {
+                    font-weight: bold;
+                    font-size: 40px;
                     display: flex;
                     align-items: center;
-                    width: 200%;
                     height: 100%;
                     margin-left: 100%;
                     animation: myMove 15s linear infinite;

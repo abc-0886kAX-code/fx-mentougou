@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:54:38
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 11:05:07
+ * @LastEditTime: 2023-05-17 16:05:26
  * @Description:
 -->
 <script setup>
@@ -66,6 +66,13 @@ function handleMenu() {
         return item;
     });
 }
+function setType(menu) {
+    if (menu.label) {
+        return "primary";
+    } else {
+        return "";
+    }
+}
 
 onMounted(() => {
     handleCommand(unref(menus)[0].children[0]);
@@ -76,7 +83,7 @@ onMounted(() => {
     <div class="sms-management-default">
         <div class="sms-management-default-head">
             <el-dropdown class="sms-management-default-head-item" size="mini" v-for="(menu, index) in menus" :tabindex="index" :key="menu.keyword" @command="handleCommand">
-                <el-button size="mini" type="primary"> {{ menu.label || menu.defaultLabel }}<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
+                <el-button size="mini" :type="setType(menu)"> {{ menu.label || menu.defaultLabel }}<i class="el-icon-arrow-down el-icon--right"></i> </el-button>
                 <el-dropdown-menu slot="dropdown">
                     <template v-for="child in menu.children">
                         <el-dropdown-item :style="setActive(child)" :command="{ ...child, index }" :key="child.keyword">{{ child.label }}</el-dropdown-item>

@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 15:35:54
+ * @LastEditTime: 2023-05-17 13:09:52
  * @Description:
  */
 import Vue from "vue";
@@ -12,6 +12,7 @@ import { extendPinia } from "@/extend/pinia";
 import { extendElement } from "@/extend/element";
 import { extendScroll } from "@/extend/scroll";
 import * as echarts from "echarts";
+import "@/assets/font/font.css";
 import "./permission";
 
 import App from "@/layout/App.vue";
