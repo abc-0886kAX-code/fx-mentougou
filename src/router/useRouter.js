@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2022-11-30 10:18:11
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-14 11:06:10
+ * @LastEditTime: 2023-05-30 16:11:21
  * @Description:
  */
 
@@ -47,6 +47,17 @@ const routes = [
                 component: () => import("@/pages/home/home.vue"),
             },
         ],
+    },
+    {
+        name: "404",
+        path: "/404",
+        meta: defineMeta(),
+        component: () => import("@/pages/NotPage/404.vue"),
+    },
+    {
+        name: "*",
+        path: "*",
+        redirect: "/404",
     },
 ];
 const router = defineRouter(routes);
