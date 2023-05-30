@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 15:18:41
+ * @LastEditTime: 2023-05-30 15:51:05
  * @Description:
 -->
 <script setup>
@@ -24,7 +24,7 @@ import { usePopup } from "@/biz/Popup/usecase/usePopup";
 import JISHUIICON from "@/assets/images/points/jishui.png";
 import SHIPINGICON from "@/assets/images/points/shiping.png";
 import YULIANGICON from "@/assets/images/points/yuliang.png";
-import LISHIJSICON from "@/assets/images/points/default_legend_icon.png";
+import LISHIJSICON from "@/assets/images/points/l-jishui.png";
 const { BillboardEntity } = graphic;
 const popup = usePopup();
 const popupEntity = popup.define({
@@ -207,8 +207,13 @@ function handleRow(row) {
 }
 
 function renderSHPLayer() {
+    const historyLayer = unref(mapview).getLayer("历史积水点", "name");
+    if (historyLayer) {
+        unref(mapview).removeLayer(historyLayer, true);
+    }
     const layer = new mars3d.layer.Shp2JsonLayer({
         // url: "http://data.mars3d.cn/file/shp/yuexi_point.zip",
+        name: "历史积水点",
         url: "https://mhsw.ytxd.com.cn:8081/mh/file/historical.zip",
         symbol: {
             type: "billboard",
