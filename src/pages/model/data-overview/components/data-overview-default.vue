@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 15:07:35
+ * @LastEditTime: 2023-05-30 15:18:41
  * @Description:
 -->
 <script setup>
@@ -221,12 +221,11 @@ function renderSHPLayer() {
     return layer;
 }
 
-async function executeQuery() {
+async function executeQuery(params) {
     videoClear();
     pondClear();
     rainfallClear();
-    await Select_Obtain();
-    await OverviewSite_Obtain();
+    await OverviewSite_Obtain(params);
     videoEntity.addGraphic(unref(videoPoints));
     pondEntity.addGraphic(unref(pondPoints));
     rainfallEntity.addGraphic(unref(rainfallPoints));
@@ -269,14 +268,15 @@ async function executeQuery() {
 
 const selectValue = ref([]);
 const selcetOptions = computed(() => transArray(unref(Select_Server.server.result.source).data, []));
-async function selectChange(value) {
-    await OverviewSite_Obtain({ sttp: value });
+function selectChange(value) {
+    executeQuery({ sttp: value.join(",") });
 }
 
-onMounted(() => {
+onMounted(async () => {
     setupBind(videoLayer);
     setupBind(pondLayer);
     setupBind(rainfallLayer);
+    await Select_Obtain({ codeid: "GB", code: "PP,WP,VD" });
     executeQuery();
 });
 onBeforeUnmount(() => {
