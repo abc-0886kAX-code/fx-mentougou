@@ -3,21 +3,22 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 11:08:58
+ * @LastEditTime: 2023-05-30 16:52:43
  * @Description:
 -->
 <script setup>
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
+import { Notification, MessageBox } from "element-ui";
 import { InfoTemplate_Obtain, InfoTemplate_Server } from "../../server/info-template";
+import { Del_Obtain } from "../../server/info-template/del";
 
 const popup = usePopup();
 const popupEntity = popup.define({
     width: "40%",
     height: "50vh",
     template: defineComponent(() => import("../../dialog/dialog-info-template.vue")),
-    title: "修改",
     afterClose: executeQuery,
 });
 
@@ -25,7 +26,7 @@ const { loading } = InfoTemplate_Server.server;
 const tableData = computed(() => transArray(unref(InfoTemplate_Server.server.result.source).data, []));
 const tableColumn = [
     {
-        prop: "gate",
+        prop: "threshold",
         label: "闸值",
         align: "center",
         width: 100,
@@ -36,15 +37,43 @@ const tableColumn = [
         align: "center",
     },
     {
-        prop: "warnInfo",
+        prop: "waringinfo",
         label: "警示信息",
         align: "center",
         width: 110,
     },
 ];
 
+function handleAdd() {
+    popupEntity.setupTitle("新增");
+    popupEntity.show({});
+}
 function handleEdit(rows) {
     popupEntity.show(rows);
+}
+async function handleDel({ id }) {
+    if (!id) return;
+    const message = await MessageBox.confirm("操作将永久删除该条信息, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+    }).catch((err) => err);
+
+    if ("confirm" === message) {
+        const data = await Del_Obtain({ id });
+        if (data.code === 200) {
+            Notification.success({
+                title: "成功!",
+                message: "删除成功!",
+            });
+            executeQuery();
+        } else {
+            Notification.error({
+                title: "错误!",
+                message: data.msg,
+            });
+        }
+    }
 }
 
 async function executeQuery() {
@@ -61,10 +90,16 @@ onBeforeUnmount(() => {
 
 <template>
     <el-table class="info-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
-        <el-table-column type="index" width="50" align="center"> </el-table-column>
-        <el-table-column label="操作" width="80" align="center">
+        <el-table-column type="index" width="60" align="center">
+            <template slot="header" slot-scope="scope">
+                <el-link type="success" @click="handleAdd">新增</el-link>
+            </template>
+        </el-table-column>
+        <el-table-column label="操作" width="100" align="center">
             <template slot-scope="scope">
                 <el-link type="warning" @click="handleEdit(scope.row)">修改</el-link>
+                <el-divider direction="vertical"></el-divider>
+                <el-link type="danger" @click="handleDel(scope.row)">删除</el-link>
             </template>
         </el-table-column>
         <template v-for="item in tableColumn">

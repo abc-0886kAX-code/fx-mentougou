@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:34:15
+ * @LastEditTime: 2023-05-30 16:51:16
  * @Description:
 -->
 <script setup>
@@ -19,21 +19,21 @@ const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
 const form = ref({
-    gate: "",
-    warnInfo: "",
+    threshold: "",
+    waringinfo: "",
     color: "",
     id: "",
 });
 
 const rules = {
-    gate: [
+    threshold: [
         {
             required: true,
             message: "阈值不可为空",
             trigger: "blur",
         },
     ],
-    warnInfo: [
+    waringinfo: [
         {
             required: true,
             validator: checkWarnInfo,
@@ -66,7 +66,7 @@ function onModify() {
         if (data.code === 200) {
             Notification.success({
                 title: "成功!",
-                message: "修改成功!",
+                message: "保存成功!",
             });
             dialog.destroy();
         } else {
@@ -85,17 +85,17 @@ onMounted(() => {
 
 <template>
     <el-form class="dialog-info-template" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="top">
-        <el-form-item prop="gate" label="阈值">
-            <el-input type="text" prefix-icon="el-icon-remove-outline" placeholder="请输入阈值" v-model="form.gate"></el-input>
+        <el-form-item prop="threshold" label="阈值">
+            <el-input type="text" prefix-icon="el-icon-remove-outline" placeholder="请输入阈值" v-model="form.threshold"></el-input>
         </el-form-item>
         <el-form-item prop="color" label="颜色">
             <el-input type="text" prefix-icon="el-icon-s-operation" placeholder="请输入颜色" v-model="form.color"></el-input>
         </el-form-item>
-        <el-form-item prop="warnInfo" label="警示信息">
-            <el-input type="text" prefix-icon="el-icon-reading" placeholder="请输入警示信息" maxlength="12" v-model="form.warnInfo"></el-input>
+        <el-form-item prop="waringinfo" label="警示信息">
+            <el-input type="text" prefix-icon="el-icon-reading" placeholder="请输入警示信息" maxlength="12" v-model="form.waringinfo"></el-input>
         </el-form-item>
         <el-form-item class="dialog-info-template-console">
-            <el-button class="dialog-info-template-console-button" type="primary" size="mini" :loading="loading" @click="onModify">修改 </el-button>
+            <el-button class="dialog-info-template-console-button" type="primary" size="mini" :loading="loading" @click="onModify">保存 </el-button>
         </el-form-item>
     </el-form>
 </template>

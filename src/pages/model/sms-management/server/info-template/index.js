@@ -3,7 +3,7 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:14:17
+ * @LastEditTime: 2023-05-30 16:43:39
  * @Description:
  */
 import { Address, Method } from "./config";
@@ -13,8 +13,8 @@ import InfoTemplate from "@/assets/json/info-template.json";
 
 const service = useService();
 function transResponse(response) {
-    // const data = get(response, "data", {});
-    const data = get(InfoTemplate, "data", []);
+    const data = get(response, "data.data", []);
+    // const data = get(InfoTemplate, "data", []);
     return { data };
 }
 
