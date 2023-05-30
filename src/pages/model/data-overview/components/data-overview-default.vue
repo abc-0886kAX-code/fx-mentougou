@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 14:52:10
+ * @LastEditTime: 2023-05-30 15:07:35
  * @Description:
 -->
 <script setup>
@@ -17,7 +17,7 @@ import { useMars3dEvent } from "@/biz/Mars3D/usecase/useMars3dEvent";
 import { setupBillboardShape } from "@/biz/Mars3D/usecase/useBillboard";
 import { useLayerLegend } from "@/biz/LayerLegend/store/useLayerLegend";
 import { OverviewSite_Obtain, OverviewSite_Server } from "../server";
-import { SelectSite_Obtain, SelectSite_Server } from "@/pages/model/statistical-analysis/server";
+import { Select_Obtain, Select_Server } from "../server/select";
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
@@ -225,7 +225,7 @@ async function executeQuery() {
     videoClear();
     pondClear();
     rainfallClear();
-    await SelectSite_Obtain();
+    await Select_Obtain();
     await OverviewSite_Obtain();
     videoEntity.addGraphic(unref(videoPoints));
     pondEntity.addGraphic(unref(pondPoints));
@@ -268,7 +268,10 @@ async function executeQuery() {
 }
 
 const selectValue = ref([]);
-const selcetOptions = computed(() => transArray(unref(SelectSite_Server.server.result.source).data, []));
+const selcetOptions = computed(() => transArray(unref(Select_Server.server.result.source).data, []));
+async function selectChange(value) {
+    await OverviewSite_Obtain({ sttp: value });
+}
 
 onMounted(() => {
     setupBind(videoLayer);
@@ -291,8 +294,8 @@ onBeforeUnmount(() => {
         <div class="data-overview-default-select">
             <div class="data-overview-default-select-label">站点类型:</div>
             <div class="data-overview-default-select-form">
-                <el-select v-model="selectValue" size="mini" multiple collapse-tags placeholder="请选择">
-                    <el-option v-for="item in selcetOptions" :key="item.stcd" :label="item.stnm" :value="item.stcd"> </el-option>
+                <el-select v-model="selectValue" size="mini" multiple collapse-tags placeholder="请选择" @change="selectChange">
+                    <el-option v-for="item in selcetOptions" :key="item.orderid" :label="item.description" :value="item.code"> </el-option>
                 </el-select>
             </div>
         </div>

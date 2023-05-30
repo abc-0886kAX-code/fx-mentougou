@@ -3,12 +3,16 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 09:26:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-11 14:16:30
+ * @LastEditTime: 2023-05-30 14:58:24
  * @Description:
  */
 // 数据总览列表
 export const Address = "/SiteInfo/getSiteInfoList";
 export const Method = "POST";
+
+// 数据总览站点类型下拉列表
+export const SelectAddress = "/common/getSmCodeItemList";
+export const SelectMethod = "GET";
 
 // 数据总览数据图表、表格
 export const ChartAddress = "/realData/getAddvcditem";
