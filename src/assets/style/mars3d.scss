@@ -1,7 +1,7 @@
 //  工具栏
 .cesium-viewer-toolbar {
     z-index: 301;
-
+    display: flex;
     // 调整工具栏中加减按钮的位置
     .mar3d-toolButton img,
     .mar3d-toolButton svg,

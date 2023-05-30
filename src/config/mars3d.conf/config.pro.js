@@ -2,7 +2,7 @@
  * @Author: zhangyang
  * @Date: 2022-04-24 12:15:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 16:27:18
+ * @LastEditTime: 2023-05-30 10:44:21
  * @Description: mars3d.config.Pro
  */
 import { CRS } from "mars3d";
@@ -75,9 +75,9 @@ export default (mode = 3) => {
             // },
             // compass: { top: "0", right: "330px" }, 导航球
             distanceLegend: { bottom: "30px", left: "0px" },
-            // zoom: {
-            //     insertIndex: 1,
-            // },
+            zoom: {
+                insertIndex: 1,
+            },
             contextmenu: {
                 hasDefault: true,
             },
@@ -86,15 +86,18 @@ export default (mode = 3) => {
             selectionIndicator: false, // 选择实体的时候是否显示标记框
             animation: false,
             timeline: false,
-            baseLayerPicker: false,
-            fullscreenButton: false,
+            baseLayerPicker: true,
+            fullscreenButton: true,
             vrButton: false,
-            geocoder: false,
+            geocoder: true,
+            geocoderConfig: { key: ["66f2edf04639c811fc275fe300a25b49"] }, //POI查询按钮参数配置
+            // 张鑫高德创建的key
+            // http://mars3d.cn/editor-vue.html?id=control/other/display&code=1 从官方中发送一个请求 查看key
             homeButton: false,
             // sceneModePicker: mode === 3,
             sceneModePicker: false,
             projectionPicker: false,
-            navigationHelpButton: false,
+            navigationHelpButton: true,
             navigationInstructionsInitiallyVisible: false,
             showRenderLoopErrors: true,
         },

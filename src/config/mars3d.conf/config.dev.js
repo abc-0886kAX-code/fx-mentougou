@@ -2,7 +2,7 @@
  * @Author: zhangyang
  * @Date: 2022-04-24 12:15:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 16:23:36
+ * @LastEditTime: 2023-05-30 10:51:06
  * @Description: mars3d.config.Dev
  */
 
@@ -66,17 +66,17 @@ export default (mode = 3) => {
             moveDelay: 0,
         },
         control: {
-            // "locationBar": {
-            //     "fps": true,
-            //     "crs": "CGCS2000_GK_Zone_3",
-            //     "crsDecimal": 0,
-            //     "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div class='hide1000'>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div class='hide700'>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div class='hide700'>视高：{cameraHeight}米</div>"
-            // },
+            locationBar: {
+                fps: true,
+                crs: "CGCS2000_GK_Zone_3",
+                crsDecimal: 0,
+                template: "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div class='hide1000'>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div class='hide700'>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div class='hide700'>视高：{cameraHeight}米</div>",
+            },
             // compass: { top: "0", right: "330px" }, 导航球
             distanceLegend: { bottom: "30px", left: "0px" },
-            // zoom: {
-            //     insertIndex: 1,
-            // },
+            zoom: {
+                insertIndex: 1,
+            },
             contextmenu: {
                 hasDefault: true,
             },
@@ -85,15 +85,18 @@ export default (mode = 3) => {
             selectionIndicator: false, // 选择实体的时候是否显示标记框
             animation: false,
             timeline: false,
-            baseLayerPicker: false,
-            fullscreenButton: false,
+            baseLayerPicker: true,
+            fullscreenButton: true,
             vrButton: false,
-            geocoder: false,
+            geocoder: true,
+            geocoderConfig: { key: ["66f2edf04639c811fc275fe300a25b49"] }, //POI查询按钮参数配置
+            // 张鑫高德创建的key
+            // http://mars3d.cn/editor-vue.html?id=control/other/display&code=1 从官方中发送一个请求 查看key
             homeButton: false,
             // sceneModePicker: mode === 3,
             sceneModePicker: false,
             projectionPicker: false,
-            navigationHelpButton: false,
+            navigationHelpButton: true,
             navigationInstructionsInitiallyVisible: false,
             showRenderLoopErrors: true,
         },
