@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 15:51:05
+ * @LastEditTime: 2023-05-30 16:21:55
  * @Description:
 -->
 <script setup>
@@ -67,7 +67,7 @@ const setupSHPFloat = (target) => {
 
     return [
         {
-            label: "积水点",
+            label: "历史积水点",
             field: attr["积水点"],
             text: attr["积水点"] ?? "--",
         },
@@ -191,7 +191,7 @@ function handleRow(row) {
         PP: unref(gather).RainfallPointLayer,
     };
     if (!entity[sttp]) {
-        console.warn("未找到该类型图层");
+        console.warn("未找到该类型图层", sttp);
         return false;
     }
     const { lockPosition, layer } = useLocation(entity[sttp]);
