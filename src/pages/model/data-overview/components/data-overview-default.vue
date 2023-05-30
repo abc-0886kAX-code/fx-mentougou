@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-17 15:58:58
+ * @LastEditTime: 2023-05-30 14:52:10
  * @Description:
 -->
 <script setup>
@@ -31,6 +31,10 @@ const popupEntity = popup.define({
     width: "70%",
     template: defineComponent(() => import("../dialog/dialog-data-overview.vue")),
 });
+const popupSHPEntity = popup.define({
+    width: "70%",
+    template: defineComponent(() => import("../dialog/dialog-shp.vue")),
+});
 const tableColumn = [
     {
         prop: "stnm",
@@ -56,6 +60,18 @@ const setupFloat = (target) => {
             text: attr[prop] ?? "--",
         };
     });
+};
+const setupSHPFloat = (target) => {
+    const { attr } = target.graphic;
+    // const keysColumn = Object.keys(attr);
+
+    return [
+        {
+            label: "积水点",
+            field: attr["积水点"],
+            text: attr["积水点"] ?? "--",
+        },
+    ];
 };
 
 function setupRoundPoint(source) {
@@ -145,6 +161,28 @@ const { setupBind } = useMars3dEvent({
     [EventType.mouseOut]: setupFloatHide,
 });
 
+// 处理SHP图层
+const handlerSHPClick = (target) => {
+    const { graphic } = target;
+    const { attr } = graphic;
+    popupSHPEntity.show(attr);
+    popupSHPEntity.setupTitle(attr["积水点"]);
+    setupFloatHide();
+    // 弹框
+};
+const handlerSHPOver = (target) => {
+    const { graphic, startPosition } = target;
+    setupFloatWindow({
+        content: setupSHPFloat(target),
+        ...startPosition,
+    });
+};
+const { setupBind: setupSHPBind } = useMars3dEvent({
+    [EventType.click]: handlerSHPClick,
+    [EventType.mouseOver]: handlerSHPOver,
+    [EventType.mouseOut]: setupFloatHide,
+});
+
 function handleRow(row) {
     const { stcd, sttp } = row;
     const entity = {
@@ -168,6 +206,21 @@ function handleRow(row) {
     });
 }
 
+function renderSHPLayer() {
+    const layer = new mars3d.layer.Shp2JsonLayer({
+        // url: "http://data.mars3d.cn/file/shp/yuexi_point.zip",
+        url: "https://mhsw.ytxd.com.cn:8081/mh/file/historical.zip",
+        symbol: {
+            type: "billboard",
+            merge: true,
+            styleOptions: setupBillboardShape({ longitude: 0, latitude: 0, image: LISHIJSICON }).style,
+        },
+    });
+    unref(mapview).addLayer(layer);
+    setupSHPBind(layer);
+    return layer;
+}
+
 async function executeQuery() {
     videoClear();
     pondClear();
@@ -177,22 +230,7 @@ async function executeQuery() {
     videoEntity.addGraphic(unref(videoPoints));
     pondEntity.addGraphic(unref(pondPoints));
     rainfallEntity.addGraphic(unref(rainfallPoints));
-    const SHPEntity = new mars3d.layer.Shp2JsonLayer({
-        url: "http://data.mars3d.cn/file/shp/yuexi_point.zip",
-        // url: "/zip/mtg.zip",
-        // url: "http://127.0.0.1:8080/mtg.rar",
-        symbol: {
-            type: "pointP",
-            merge: true,
-            styleOptions: {
-                color: "#ff0000",
-                pixelSize: 6,
-                addHeight: 500,
-            },
-        },
-    });
-    unref(mapview).addLayer(SHPEntity);
-
+    const SHPEntity = renderSHPLayer();
     legendStore.setCheckList([
         {
             keyword: "video",
@@ -244,6 +282,7 @@ onBeforeUnmount(() => {
     rainfallLayer.remove();
     legendStore.clearCheckList();
     popup.release(popupEntity);
+    popup.release(popupSHPEntity);
 });
 </script>
 
