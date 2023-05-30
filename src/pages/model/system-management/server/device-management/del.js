@@ -1,9 +1,9 @@
 /*
- * @FilePath: \fx-mentougou\src\pages\model\device-management\server\device-management\del.js
+ * @FilePath: \fx-mentougou\src\pages\model\system-management\server\device-management\del.js
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 14:07:34
+ * @LastEditTime: 2023-05-30 17:43:39
  * @Description:
  */
 import { DelAddress, DelMethod } from "./config";
@@ -22,7 +22,7 @@ export const Del_Server = service.define({
 });
 
 export function Del_Obtain(props) {
-    Del_Server.server.config.bind("data", transFormData(props));
+    Del_Server.server.config.bind("params", props);
     return Del_Server.obtain({ transResponse });
 }
 

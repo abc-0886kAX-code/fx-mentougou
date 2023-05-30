@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:55:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 10:52:25
+ * @LastEditTime: 2023-05-30 17:54:25
  * @Description:
 -->
 <script setup>
@@ -26,18 +26,18 @@ const { loading } = SystemManage_Server.server;
 const tableData = computed(() => transArray(unref(SystemManage_Server.server.result.source).data, []));
 const tableColumn = [
     {
-        prop: "name",
+        prop: "truename",
         label: "人员姓名",
         align: "center",
     },
     {
-        prop: "username",
-        label: "登录账号",
+        prop: "sexCopy",
+        label: "性别",
         align: "center",
     },
     {
-        prop: "role",
-        label: "角色",
+        prop: "loginname",
+        label: "登录账号",
         align: "center",
     },
     {
@@ -55,8 +55,8 @@ function handleEdit(rows) {
     popupEntity.setupTitle("修改");
     popupEntity.show(rows);
 }
-async function handleDel({ id }) {
-    if (!id) return;
+async function handleDel({ userid }) {
+    if (!userid) return;
     const message = await MessageBox.confirm("操作将永久删除该条信息, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -64,7 +64,7 @@ async function handleDel({ id }) {
     }).catch((err) => err);
 
     if ("confirm" === message) {
-        const data = await Del_Obtain({ id });
+        const data = await Del_Obtain({ userid });
         if (data.code === 200) {
             Notification.success({
                 title: "成功!",

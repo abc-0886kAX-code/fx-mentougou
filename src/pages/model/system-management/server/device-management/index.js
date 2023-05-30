@@ -3,19 +3,26 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 09:54:22
+ * @LastEditTime: 2023-05-30 17:58:05
  * @Description:
  */
 import { Address, Method } from "./config";
 import { useService } from "@/service/Application";
 import { transFormData } from "~/shared/trans";
 import SystemManage from "@/assets/json/system-manage.json";
+const sexMap = {
+    "01": "男",
+    "02": "女",
+};
 
 const service = useService();
 function transResponse(response) {
-    // const data = get(response, "data", {});
-    const data = get(SystemManage, "data", []);
-    return { data };
+    const data = get(response, "data.data", []);
+    const handleData = data.map((item) => {
+        item["sexCopy"] = sexMap[item["sex"]] ?? null;
+        return item;
+    });
+    return { data: handleData };
 }
 
 export const SystemManage_Server = service.define({

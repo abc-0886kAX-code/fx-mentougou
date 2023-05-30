@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 10:08:36
+ * @LastEditTime: 2023-05-30 17:53:52
  * @Description:
 -->
 <script setup>
@@ -19,26 +19,18 @@ const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
-const form = reactive({
-    name: "",
-    username: "",
-    id: "",
-    role: "",
+const form = ref({
+    truename: "",
+    loginname: "",
+    userid: "",
     remark: "",
 });
 
 const rules = {
-    name: [
+    truename: [
         {
             required: true,
             message: "人员姓名不可为空",
-            trigger: "blur",
-        },
-    ],
-    username: [
-        {
-            required: true,
-            message: "登录账号不可为空",
             trigger: "blur",
         },
     ],
@@ -70,16 +62,15 @@ function onModify() {
     });
 }
 
-function tomapper(body) {
-    form.name = get(body, "name", "");
-    form.username = get(body, "username", "");
-    form.id = get(body, "id", "");
-    form.role = get(body, "role", "");
-    form.remark = get(body, "remark", "");
-}
+// function tomapper(body) {
+//     form.truename = get(body, "truename", "");
+//     form.loginname = get(body, "loginname", "");
+//     form.userid = get(body, "userid", "");
+//     form.remark = get(body, "remark", "");
+// }
 
 onMounted(() => {
-    tomapper(unref(config));
+    form.value = unref(config);
 });
 </script>
 
@@ -87,16 +78,22 @@ onMounted(() => {
     <el-form class="dialog-system-management" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="left" label-width="80px">
         <el-row :gutter="20">
             <el-col :span="12">
-                <el-form-item prop="name" label="人员姓名"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入人员姓名" v-model="form.name"></el-input> </el-form-item
+                <el-form-item prop="truename" label="人员姓名"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入人员姓名" v-model="form.truename"></el-input> </el-form-item
             ></el-col>
-            <el-col :span="12"
-                ><el-form-item prop="username" label="登录账号"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入登录账号" v-model="form.username"></el-input> </el-form-item
+            <el-col :span="12">
+                <el-form-item prop="truename" label="性别">
+                    <el-select v-model="form.sex" placeholder="请选择性别">
+                        <el-option label="男" value="01"></el-option>
+                        <el-option label="女" value="02"></el-option>
+                    </el-select> </el-form-item
             ></el-col>
+            <el-col :span="12"></el-col>
         </el-row>
+
         <el-row :gutter="20">
             <el-col :span="24">
-                <el-form-item prop="role" label="角色"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入角色" v-model="form.role"></el-input> </el-form-item
-            ></el-col>
+                <el-form-item prop="loginname" label="登录账号"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入登录账号" v-model="form.loginname" disabled></el-input> </el-form-item>
+            </el-col>
         </el-row>
         <el-row :gutter="20">
             <el-col :span="24">
