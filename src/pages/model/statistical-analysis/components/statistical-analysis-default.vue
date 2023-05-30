@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:46:56
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-12 15:54:38
+ * @LastEditTime: 2023-05-30 16:08:31
  * @Description:
 -->
 <script setup>
@@ -71,8 +71,8 @@ onBeforeUnmount(() => {
                 </div>
             </div>
             <div class="statistical-analysis-default-form-item">
-                <el-button size="mini" type="primary" @click="openPopup">查询</el-button>
-                <el-button size="mini" type="danger" @click="executeReset">重置</el-button>
+                <el-button size="mini" type="primary" @click="openPopup"><i class="el-icon-search el-icon--left"></i>查询</el-button>
+                <el-button size="mini" type="danger" @click="executeReset"><i class="el-icon-refresh el-icon--left"></i>重置</el-button>
             </div>
         </div>
     </div>

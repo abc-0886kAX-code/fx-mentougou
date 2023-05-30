@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 15:00:13
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-28 11:14:24
+ * @LastEditTime: 2023-05-30 16:07:10
  * @Description:
 -->
 <script setup>
@@ -65,9 +65,9 @@ onMounted(() => {
         <div class="data-table-form">
             <el-date-picker v-model="dateVal" size="mini" type="datetimerange" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
             <div>
-                <el-button size="mini" type="primary" @click="executeQuery">查询</el-button>
-                <el-button size="mini" type="danger" @click="executeReset">重置</el-button>
-                <el-button size="mini" type="warning" @click="executeExport">导出</el-button>
+                <el-button size="mini" type="primary" @click="executeQuery"><i class="el-icon-search el-icon--left"></i>查询</el-button>
+                <el-button size="mini" type="danger" @click="executeReset"><i class="el-icon-refresh el-icon--left"></i>重置</el-button>
+                <el-button size="mini" type="warning" @click="executeExport"><i class="el-icon-upload el-icon--left"></i>导出</el-button>
             </div>
         </div>
         <el-table class="data-table-body" size="mini" :data="source" width="100%" height="100%">

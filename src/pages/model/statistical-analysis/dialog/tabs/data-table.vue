@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-25 15:25:15
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-17 16:14:19
+ * @LastEditTime: 2023-05-30 16:03:22
  * @Description:
 -->
 <script setup>
@@ -29,7 +29,7 @@ async function executeQuery() {
     await ChartData_Obtain(unref(config));
 }
 
-const max = [
+const max = ref([
     {
         stnm: "测试站点",
         max: "20",
@@ -42,7 +42,11 @@ const max = [
         stnm: "测试站点2",
         max: "20",
     },
-];
+]);
+
+function exportExcel() {
+    console.log("导出");
+}
 
 onMounted(() => {
     executeQuery();
@@ -56,7 +60,7 @@ onMounted(() => {
                 <span>最大值：</span>
                 <div class="data-table-console-info-item" v-for="(item, index) in max" :key="index">{{ item.stnm }}：{{ item.max }}</div>
             </div>
-            <el-button type="primary" size="mini">导出<i class="el-icon-upload el-icon--right"></i></el-button>
+            <el-button type="primary" size="mini" @click="exportExcel">导出<i class="el-icon-upload el-icon--right"></i></el-button>
         </div>
         <el-table class="data-table-body" v-loading="loading" v-bind="loadStyle" size="mini" :data="source.tableRows" width="100%" height="100%">
             <el-table-column width="150" prop="tm" align="center"> </el-table-column>

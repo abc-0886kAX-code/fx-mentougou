@@ -136,8 +136,8 @@ onMounted(() => {
             <el-date-picker v-model="dateVal" size="mini" type="datetimerange" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
 
             <div>
-                <el-button size="mini" type="primary" @click="executeQuery">查询</el-button>
-                <el-button size="mini" type="danger" @click="executeReset">重置</el-button>
+                <el-button size="mini" type="primary" @click="executeQuery"><i class="el-icon-search el-icon--left"></i>查询</el-button>
+                <el-button size="mini" type="danger" @click="executeReset"><i class="el-icon-refresh el-icon--left"></i>重置</el-button>
             </div>
         </div>
         <div class="data-chart-body" ref="refs"></div>
