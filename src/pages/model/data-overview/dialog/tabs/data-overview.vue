@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 14:59:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-31 15:44:26
+ * @LastEditTime: 2023-05-31 17:31:54
  * @Description:
 -->
 <script setup>
@@ -24,6 +24,7 @@ const source = computed(() => {
         r: "",
         showmsg: "",
         videoinfo: [],
+        color: "rgba(255, 0, 0, 1)"
     });
 });
 const dialog = useDialog(props.popupKeyword);
@@ -37,6 +38,7 @@ const params = computed(() => {
 const LEDStyle = computed(() => {
     return {
         width: `calc(100% + ${unref(source).showmsg?.length ?? 0 * 41}px)`,
+        color: unref(source).color ?? 'rgba(255, 0, 0, 1)'
     };
 });
 
@@ -53,13 +55,17 @@ onMounted(() => {
     <div class="data-overview" v-loading="loading" v-bind="loadStyle">
         <div class="data-overview-info">
             <el-descriptions title="信息展示" :column="1" border class="data-overview-info-pond">
-                <el-descriptions-item label="当前积水水位" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">{{ source.z ?? "暂无数据" }}</el-descriptions-item>
-                <el-descriptions-item label="雨量数据" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">{{ source.rainname }} - {{ source.r ?? "暂无数据" }}</el-descriptions-item>
+                <el-descriptions-item label="当前积水水位" :labelStyle="{ background: '#FDE2E2', color: '#000' }"
+                    :contentStyle="{ 'text-align': 'center' }">{{ source.z ?? "暂无数据" }}</el-descriptions-item>
+                <el-descriptions-item label="雨量数据" :labelStyle="{ background: '#FDE2E2', color: '#000' }"
+                    :contentStyle="{ 'text-align': 'center' }">{{ source.rainname }} - {{ source.r ?? "暂无数据"
+                    }}</el-descriptions-item>
             </el-descriptions>
 
             <el-card class="data-overview-info-led" :body-style="{ padding: '0px' }" shadow="always">
                 <div class="data-overview-info-led-content">
-                    <div class="data-overview-info-led-content-animation" :style="LEDStyle">{{ source.showmsg ?? "暂无信息" }}</div>
+                    <div class="data-overview-info-led-content-animation" :style="LEDStyle">{{ source.showmsg ?? "暂无信息" }}
+                    </div>
                 </div>
                 <div class="data-overview-info-led-text">
                     <span>{{ source.showmsg ?? "暂无信息" }}</span>
@@ -89,31 +95,35 @@ onMounted(() => {
     height: 100%;
     display: flex;
     justify-content: space-evenly;
+
     &-info,
     &-video {
         height: 100%;
         width: 47%;
     }
+
     &-info {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
         font-size: 18px;
+
         &-pond,
         &-led {
             width: 100%;
             height: 47%;
             color: #fff;
+
             &-content {
                 height: calc(80% - 10px);
-                color: #ff0000;
                 text-decoration: none;
                 border: 5px ridge #999;
                 background-color: #222;
                 padding-top: 8px;
                 padding-right: 5px;
                 padding-left: 5px;
+
                 &-animation {
                     font-weight: bold;
                     font-size: 40px;
@@ -125,6 +135,7 @@ onMounted(() => {
                     animation-fill-mode: forwards;
                 }
             }
+
             &-text {
                 color: #000;
                 height: 20%;
@@ -133,21 +144,26 @@ onMounted(() => {
             }
         }
     }
+
     &-video {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+
         &-item {
             width: 100%;
             height: 47%;
+
             &-content {
                 height: 80%;
             }
+
             &-text {
                 height: 20%;
                 padding: 6px;
                 box-sizing: border-box;
+
                 &-details {
                     padding: 6px;
                     box-sizing: border-box;
@@ -158,19 +174,23 @@ onMounted(() => {
         }
     }
 }
+
 video {
     width: 100%;
     height: 100%;
     object-fit: fill;
 }
+
 :deep(.el-card__body) {
     height: 100%;
 }
+
 :deep(.el-descriptions__header) {
     width: 100%;
     height: 20%;
     margin-bottom: 0px;
 }
+
 :deep(.el-descriptions__body) {
     width: 100%;
     height: 80%;
@@ -180,8 +200,8 @@ video {
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-100%);
     }
-}
-</style>
+}</style>

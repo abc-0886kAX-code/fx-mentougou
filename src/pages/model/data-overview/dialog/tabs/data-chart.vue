@@ -96,7 +96,7 @@ function setupOptions() {
             {
                 name: "水深(cm)",
                 yAxisIndex: 0,
-                data: unref(source).map((item) => Math.ceil(Math.random() * 10)),
+                data: unref(source).map((item) => item.z),
                 type: "line",
                 z: 1,
             },
@@ -133,11 +133,14 @@ onMounted(() => {
 <template>
     <div class="data-chart" v-loading="loading" v-bind="loadStyle">
         <div class="data-chart-form">
-            <el-date-picker v-model="dateVal" size="mini" type="datetimerange" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
+            <el-date-picker v-model="dateVal" size="mini" type="datetimerange" start-placeholder="开始日期"
+                end-placeholder="结束日期" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
 
             <div>
-                <el-button size="mini" type="primary" @click="executeQuery"><i class="el-icon-search el-icon--left"></i>查询</el-button>
-                <el-button size="mini" type="danger" @click="executeReset"><i class="el-icon-refresh el-icon--left"></i>重置</el-button>
+                <el-button size="mini" type="primary" @click="executeQuery"><i
+                        class="el-icon-search el-icon--left"></i>查询</el-button>
+                <el-button size="mini" type="danger" @click="executeReset"><i
+                        class="el-icon-refresh el-icon--left"></i>重置</el-button>
             </div>
         </div>
         <div class="data-chart-body" ref="refs"></div>
@@ -151,6 +154,7 @@ onMounted(() => {
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+
     &-form {
         height: 15%;
         display: flex;
@@ -158,8 +162,8 @@ onMounted(() => {
         align-items: center;
         justify-content: space-evenly;
     }
+
     &-body {
         height: 85%;
     }
-}
-</style>
+}</style>

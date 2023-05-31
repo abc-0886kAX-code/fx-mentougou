@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-31 17:14:15
+ * @LastEditTime: 2023-05-31 17:26:43
  * @Description:
 -->
 <script setup>
@@ -35,7 +35,7 @@ const tableColumn = [
         prop: "color",
         label: "颜色",
         align: "center",
-        width:80
+        width: 80
     },
     {
         prop: "waringinfo",
@@ -110,7 +110,8 @@ onBeforeUnmount(() => {
                 <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
                     :align="item.align">
                     <template slot-scope="scope">
-                        <div :style="{ width: '15px', height: '15px', backgroundColor: scope.row.color }">
+                        <div
+                            :style="{ width: '15px', height: '15px', backgroundColor: scope.row.color, textAlign: 'center' }">
                         </div>
                     </template>
                 </el-table-column>
