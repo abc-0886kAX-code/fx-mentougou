@@ -1,6 +1,14 @@
 <!--
  * @FilePath: \fx-mentougou\src\pages\model\sms-management\components\tabs\current-state.vue
  * @Author: zhangxin
+ * @Date: 2023-04-26 17:07:27
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-05-31 15:04:35
+ * @Description:
+-->
+<!--
+ * @FilePath: \fx-mentougou\src\pages\model\sms-management\components\tabs\current-state.vue
+ * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
  * @LastEditTime: 2023-04-28 10:27:57
@@ -20,7 +28,12 @@ const tableColumn = [
         align: "center",
     },
     {
-        prop: "info",
+        prop: "tm",
+        label: "时间",
+        align: "center",
+    },
+    {
+        prop: "showmsg",
         label: "LED屏当前信息",
         align: "center",
     },

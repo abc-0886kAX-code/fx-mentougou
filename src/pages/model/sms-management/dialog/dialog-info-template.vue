@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 16:51:16
+ * @LastEditTime: 2023-05-31 15:55:04
  * @Description:
 -->
 <script setup>
@@ -89,7 +89,8 @@ onMounted(() => {
             <el-input type="text" prefix-icon="el-icon-remove-outline" placeholder="请输入阈值" v-model="form.threshold"></el-input>
         </el-form-item>
         <el-form-item prop="color" label="颜色">
-            <el-input type="text" prefix-icon="el-icon-s-operation" placeholder="请输入颜色" v-model="form.color"></el-input>
+            <!-- <el-input type="text" prefix-icon="el-icon-s-operation" placeholder="请输入颜色" v-model="form.color"></el-input> -->
+            <el-color-picker v-model="form.color" show-alpha></el-color-picker>
         </el-form-item>
         <el-form-item prop="waringinfo" label="警示信息">
             <el-input type="text" prefix-icon="el-icon-reading" placeholder="请输入警示信息" maxlength="12" v-model="form.waringinfo"></el-input>

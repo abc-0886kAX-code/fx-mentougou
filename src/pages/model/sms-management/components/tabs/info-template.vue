@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 16:52:43
+ * @LastEditTime: 2023-05-31 17:14:15
  * @Description:
 -->
 <script setup>
@@ -35,6 +35,7 @@ const tableColumn = [
         prop: "color",
         label: "颜色",
         align: "center",
+        width:80
     },
     {
         prop: "waringinfo",
@@ -49,6 +50,7 @@ function handleAdd() {
     popupEntity.show({});
 }
 function handleEdit(rows) {
+    popupEntity.setupTitle("修改");
     popupEntity.show(rows);
 }
 async function handleDel({ id }) {
@@ -89,7 +91,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="info-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
+    <el-table class="info-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%"
+        height="100%">
         <el-table-column type="index" width="60" align="center">
             <template slot="header" slot-scope="scope">
                 <el-link type="success" @click="handleAdd">新增</el-link>
@@ -102,8 +105,18 @@ onBeforeUnmount(() => {
                 <el-link type="danger" @click="handleDel(scope.row)">删除</el-link>
             </template>
         </el-table-column>
-        <template v-for="item in tableColumn">
-            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
+        <template v-for="item in       tableColumn      ">
+            <template v-if="item.prop === 'color'">
+                <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
+                    :align="item.align">
+                    <template slot-scope="scope">
+                        <div :style="{ width: '15px', height: '15px', backgroundColor: scope.row.color }">
+                        </div>
+                    </template>
+                </el-table-column>
+            </template>
+            <el-table-column v-else :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
+                :align="item.align"> </el-table-column>
         </template>
     </el-table>
 </template>

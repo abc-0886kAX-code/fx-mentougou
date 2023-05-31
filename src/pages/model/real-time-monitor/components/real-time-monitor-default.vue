@@ -3,21 +3,21 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:46:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 17:40:34
+ * @LastEditTime: 2023-05-31 15:38:44
  * @Description:
 -->
 <script setup>
 import { transArray } from "~/shared/trans";
 import { loadStyle } from "@/biz/share/entify/Load";
-import { OverviewSite_Obtain, OverviewSite_Server } from "../server";
+import { Monitor_Obtain, Monitor_Server } from "../server";
 import { useMars3d } from "@/biz/Mars3D/usecase/useMars3D";
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
 
 const popup = usePopup();
 const popupEntity = popup.define({
     width: "60%",
-    title: "数据总览",
-    template: defineComponent(() => import("../dialog/dialog-real-time-monitor.vue")),
+    title: "实时监控",
+    template: defineComponent(() => import("@/pages/model/data-overview/dialog/tabs/data-overview.vue")),
 });
 
 const tableColumn = [
@@ -32,7 +32,7 @@ const tableColumn = [
         align: "center",
     },
     {
-        prop: "visualangle",
+        prop: "introduce",
         label: "视角",
         align: "center",
     },
@@ -44,8 +44,17 @@ const tableColumn = [
 ];
 const { mapview } = useMars3d();
 
-const { loading } = OverviewSite_Server.server;
-const tableData = computed(() => transArray(unref(OverviewSite_Server.server.result.source).data, []));
+const { loading } = Monitor_Server.server;
+const tableData = computed(() => transArray(unref(Monitor_Server.server.result.source).data, []));
+const tableInfo = computed(() => {
+    const online = unref(tableData).filter((item) => item.state === "在线").length;
+    const offline = unref(tableData).filter((item) => item.state === "离线").length;
+    return {
+        total: unref(tableData).length,
+        online,
+        offline,
+    };
+});
 
 function handleRow(row) {
     const { lttd, lgtd } = row;
@@ -65,7 +74,7 @@ function handleClick(row) {
 }
 
 async function executeQuery() {
-    await OverviewSite_Obtain();
+    await Monitor_Obtain();
 }
 
 onMounted(() => {
@@ -80,8 +89,8 @@ onBeforeUnmount(() => {
 <template>
     <div class="real-time-monitor-default">
         <div class="real-time-monitor-default-stat">
-            <div class="real-time-monitor-default-stat-total">监控总数 4</div>
-            <div class="real-time-monitor-default-stat-state">在线 4 - 离线 0</div>
+            <div class="real-time-monitor-default-stat-total">监控总数 {{ tableInfo.total }}</div>
+            <div class="real-time-monitor-default-stat-state">在线 {{ tableInfo.online }} - 离线 {{ tableInfo.offline }}</div>
         </div>
         <el-table class="real-time-monitor-default-table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" @row-click="handleRow" width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>

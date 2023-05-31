@@ -3,62 +3,82 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 14:59:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-17 13:28:18
+ * @LastEditTime: 2023-05-31 15:44:26
  * @Description:
 -->
 <script setup>
+import VideoUrl from "@/components/VideoUrl.vue";
+
 import { useDialog } from "@/biz/Popup/usecase/useDialog";
+import { loadStyle } from "@/biz/share/entify/Load";
+import { SiteInfo_Obtain, SiteInfo_Server } from "../../server/info";
+import { transObject } from "~/shared/trans";
 const props = defineProps({
     popupKeyword: String,
 });
+const { loading } = SiteInfo_Server.server;
+const source = computed(() => {
+    return transObject(unref(SiteInfo_Server.server.result.source).data, {
+        z: "",
+        rainname: "",
+        r: "",
+        showmsg: "",
+        videoinfo: [],
+    });
+});
 const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
-
-const LEDLabel = "前方积水200米,注意安全!";
+const params = computed(() => {
+    return {
+        stcd: unref(config).stcd,
+        stnm: unref(config).stnm,
+    };
+});
 const LEDStyle = computed(() => {
     return {
-        width: `calc(100% + ${LEDLabel.length * 41}px)`,
+        width: `calc(100% + ${unref(source).showmsg?.length ?? 0 * 41}px)`,
     };
+});
+
+async function executeQuery() {
+    await SiteInfo_Obtain(unref(params));
+}
+
+onMounted(() => {
+    executeQuery();
 });
 </script>
 
 <template>
-    <div class="data-overview">
+    <div class="data-overview" v-loading="loading" v-bind="loadStyle">
         <div class="data-overview-info">
             <el-descriptions title="信息展示" :column="1" border class="data-overview-info-pond">
-                <el-descriptions-item label="当前积水水位" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">{{ config.z }}米</el-descriptions-item>
-                <el-descriptions-item label="雨量数据" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">XXX雨量站 12mm</el-descriptions-item>
+                <el-descriptions-item label="当前积水水位" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">{{ source.z ?? "暂无数据" }}</el-descriptions-item>
+                <el-descriptions-item label="雨量数据" :labelStyle="{ background: '#FDE2E2', color: '#000' }" :contentStyle="{ 'text-align': 'center' }">{{ source.rainname }} - {{ source.r ?? "暂无数据" }}</el-descriptions-item>
             </el-descriptions>
 
             <el-card class="data-overview-info-led" :body-style="{ padding: '0px' }" shadow="always">
                 <div class="data-overview-info-led-content">
-                    <div class="data-overview-info-led-content-animation" :style="LEDStyle">{{ LEDLabel }}</div>
+                    <div class="data-overview-info-led-content-animation" :style="LEDStyle">{{ source.showmsg ?? "暂无信息" }}</div>
                 </div>
                 <div class="data-overview-info-led-text">
-                    <span>{{ LEDLabel }}</span>
+                    <span>{{ source.showmsg ?? "暂无信息" }}</span>
                 </div>
             </el-card>
         </div>
         <div class="data-overview-video">
-            <el-card class="data-overview-video-item" :body-style="{ padding: '0px' }" shadow="always">
-                <div class="data-overview-video-item-content">
-                    <video src="/mp4/login-video.mp4" type="video/mp4" controls autoplay loop muted />
-                </div>
-                <div class="data-overview-video-item-text">
-                    <span>摄像头说明</span>
-                    <div class="data-overview-video-item-text-details">东向西</div>
-                </div>
-            </el-card>
-            <el-card class="data-overview-video-item" :body-style="{ padding: '0px' }" shadow="always">
-                <div class="data-overview-video-item-content">
-                    <video src="/mp4/header-video.mp4" type="video/mp4" controls autoplay loop muted />
-                </div>
-
-                <div class="data-overview-video-item-text">
-                    <span>摄像头说明</span>
-                    <div class="data-overview-video-item-text-details">南向北</div>
-                </div>
-            </el-card>
+            <template v-for="item in source.videoinfo">
+                <el-card class="data-overview-video-item" :key="item.stcd" :body-style="{ padding: '0px' }" shadow="always">
+                    <div class="data-overview-video-item-content">
+                        <!-- <video :src="item.videopath" type="video/mp4" controls autoplay loop muted /> -->
+                        <VideoUrl fit="unset" :url="item.videopath"> </VideoUrl>
+                    </div>
+                    <div class="data-overview-video-item-text">
+                        <span>摄像头说明</span>
+                        <div class="data-overview-video-item-text-details">{{ item.introduce }}</div>
+                    </div>
+                </el-card>
+            </template>
         </div>
     </div>
 </template>

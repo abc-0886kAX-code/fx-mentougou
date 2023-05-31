@@ -3,7 +3,7 @@
  * @Author: zhangyang
  * @Date: 2023-02-03 14:27:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-04-27 13:07:14
+ * @LastEditTime: 2023-05-31 15:05:36
  * @Description:
  */
 import { Address, Method } from "./config";
@@ -13,8 +13,8 @@ import CurrentState from "@/assets/json/current-state.json";
 
 const service = useService();
 function transResponse(response) {
-    // const data = get(response, "data", {});
-    const data = get(CurrentState, "data", []);
+    const data = get(response, "data.data", []);
+    // const data = get(CurrentState, "data", []);
     return { data };
 }
 
