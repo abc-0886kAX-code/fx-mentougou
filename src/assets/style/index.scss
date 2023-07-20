@@ -45,8 +45,7 @@ p {
     overflow: hidden;
 }
 
-
-.furnace-message>p {
+.furnace-message > p {
     padding-left: 12px;
     color: #909399;
 }
@@ -62,4 +61,29 @@ p {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
+}
+
+$normFontColor: #50cfe6;
+$normBorderColor: rgba($normFontColor, 0.6);
+$hoverBackgroundColor: rgba($normBorderColor, 0.3);
+$tableBackgroundColor: transparent;
+
+::-webkit-scrollbar-thumb {
+    background-color: $hoverBackgroundColor;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar {
+    background-color: $tableBackgroundColor;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* 修改滚动条的宽度 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }

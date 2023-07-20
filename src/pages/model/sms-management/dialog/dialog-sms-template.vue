@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-20 10:03:32
+ * @LastEditTime: 2023-07-20 10:16:28
  * @Description:
 -->
 <script setup>
@@ -99,6 +99,7 @@ onMounted(() => {
     width: 100%;
     height: 100%;
     padding: 20px;
+    overflow: auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
