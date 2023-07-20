@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 13:13:02
+ * @LastEditTime: 2023-07-20 10:51:45
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -96,7 +96,7 @@ export default defineConfig(({ mode }) => {
             }),
             visualizer({
                 filename: "./node_modules/.cache/visualizer/stats.html",
-                open: false,
+                open: true,
                 gzipSize: true,
                 brotliSize: true,
             }),

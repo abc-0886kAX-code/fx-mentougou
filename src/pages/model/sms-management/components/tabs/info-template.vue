@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-31 17:26:43
+ * @LastEditTime: 2023-07-20 10:44:30
  * @Description:
 -->
 <script setup>
@@ -26,10 +26,16 @@ const { loading } = InfoTemplate_Server.server;
 const tableData = computed(() => transArray(unref(InfoTemplate_Server.server.result.source).data, []));
 const tableColumn = [
     {
-        prop: "threshold",
-        label: "闸值",
+        prop: "minthreshold",
+        label: "最小阈值",
         align: "center",
-        width: 100,
+        width: 80,
+    },
+    {
+        prop: "maxthreshold",
+        label: "最大阈值",
+        align: "center",
+        width: 80,
     },
     {
         prop: "color",

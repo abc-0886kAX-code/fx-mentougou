@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-31 15:55:04
+ * @LastEditTime: 2023-07-20 10:44:01
  * @Description:
 -->
 <script setup>
@@ -19,17 +19,25 @@ const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
 const form = ref({
-    threshold: "",
+    minthreshold: "",
+    maxthreshold: "",
     waringinfo: "",
     color: "",
     id: "",
 });
 
 const rules = {
-    threshold: [
+    minthreshold: [
         {
             required: true,
-            message: "阈值不可为空",
+            message: "最小阈值不可为空",
+            trigger: "blur",
+        },
+    ],
+    maxthreshold: [
+        {
+            required: true,
+            message: "最大阈值不可为空",
             trigger: "blur",
         },
     ],
@@ -85,18 +93,25 @@ onMounted(() => {
 
 <template>
     <el-form class="dialog-info-template" ref="ModifyForm" :model="form" :rules="rules" size="mini" label-position="top">
-        <el-form-item prop="threshold" label="阈值">
-            <el-input type="text" prefix-icon="el-icon-remove-outline" placeholder="请输入阈值" v-model="form.threshold"></el-input>
+        <el-form-item prop="minthreshold" label="最小阈值">
+            <el-input type="number" prefix-icon="el-icon-remove-outline" placeholder="请输入最小阈值"
+                v-model="form.minthreshold"></el-input>
+        </el-form-item>
+        <el-form-item prop="maxthreshold" label="最大阈值">
+            <el-input type="number" prefix-icon="el-icon-remove-outline" placeholder="请输入最大阈值"
+                v-model="form.maxthreshold"></el-input>
         </el-form-item>
         <el-form-item prop="color" label="颜色">
             <!-- <el-input type="text" prefix-icon="el-icon-s-operation" placeholder="请输入颜色" v-model="form.color"></el-input> -->
             <el-color-picker v-model="form.color" show-alpha></el-color-picker>
         </el-form-item>
         <el-form-item prop="waringinfo" label="警示信息">
-            <el-input type="text" prefix-icon="el-icon-reading" placeholder="请输入警示信息" maxlength="12" v-model="form.waringinfo"></el-input>
+            <el-input type="text" prefix-icon="el-icon-reading" placeholder="请输入警示信息" maxlength="12"
+                v-model="form.waringinfo"></el-input>
         </el-form-item>
         <el-form-item class="dialog-info-template-console">
-            <el-button class="dialog-info-template-console-button" type="primary" size="mini" :loading="loading" @click="onModify">保存 </el-button>
+            <el-button class="dialog-info-template-console-button" type="primary" size="mini" :loading="loading"
+                @click="onModify">保存 </el-button>
         </el-form-item>
     </el-form>
 </template>
@@ -109,14 +124,17 @@ onMounted(() => {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+
     &-console {
         margin: 20px auto;
         height: 100%;
+
         &-button {
             width: 80px;
         }
     }
 }
+
 :deep(.el-form-item__label) {
     color: #fff;
 }
