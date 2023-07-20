@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-20 10:00:12
+ * @LastEditTime: 2023-07-20 11:05:34
  * @Description:
 -->
 <script setup>
@@ -27,13 +27,13 @@ const tableData = computed(() => transArray(unref(SMS_Server.server.result.sourc
 const tableColumn = [
     {
         prop: "minthreshold",
-        label: "最小闸值",
+        label: "最小阈值",
         align: "center",
         width: 70,
     },
     {
         prop: "maxthreshold",
-        label: "最大闸值",
+        label: "最大阈值",
         align: "center",
         width: 70,
     },
