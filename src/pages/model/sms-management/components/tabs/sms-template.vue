@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:07:17
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-12 17:01:17
+ * @LastEditTime: 2023-07-20 10:00:12
  * @Description:
 -->
 <script setup>
@@ -26,10 +26,16 @@ const { loading } = SMS_Server.server;
 const tableData = computed(() => transArray(unref(SMS_Server.server.result.source).data, []));
 const tableColumn = [
     {
-        prop: "gate",
-        label: "闸值",
+        prop: "minthreshold",
+        label: "最小闸值",
         align: "center",
-        width: 60,
+        width: 70,
+    },
+    {
+        prop: "maxthreshold",
+        label: "最大闸值",
+        align: "center",
+        width: 70,
     },
     {
         prop: "content",
@@ -85,7 +91,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="sms-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
+    <el-table class="sms-template" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%"
+        height="100%">
         <el-table-column type="index" width="60" align="center">
             <template slot="header" slot-scope="scope">
                 <el-link type="success" @click="handleAdd">新增</el-link>
@@ -99,7 +106,8 @@ onBeforeUnmount(() => {
             </template>
         </el-table-column>
         <template v-for="item in tableColumn">
-            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
+            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align">
+            </el-table-column>
         </template>
     </el-table>
 </template>
