@@ -1,9 +1,9 @@
 /*
- * @FilePath: \数字大厅\src\middleware\token.request.js
+ * @FilePath: \fx-mentougou\src\middleware\token.request.js
  * @Author: maggot-code
  * @Date: 2022-11-01 10:42:20
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-03-21 17:34:38
+ * @LastEditTime: 2023-07-21 17:39:21
  * @Description:
  */
 import { uuid } from "@/shared/uuid.js";
@@ -25,34 +25,35 @@ function normal(config) {
 function response(response) {
     const res = response.data;
     if (res.code != 200) {
-        if (res.code == 203) {
-            MessageBox.confirm(res.msg, "提示", {
-                type: "warning",
-                showCancelButton: false,
-                confirmButtonText: "确定",
-            }).then(() => {
-                user.emptyUserInfo();
-                setTimeout(() => {
-                    router.push("/login");
-                }, 1000);
+        if (res.code == 401) {
+            Message({
+                message: res.msg || "登录过期,请重新登录!",
+                type: "error",
+                duration: 1500,
+                onClose: () => {
+                    user.emptyUserInfo();
+                    setTimeout(() => {
+                        router.push("/login");
+                    }, 1000);
+                },
             });
         } else {
             Message({
                 message: res.msg || "请求出错，请重试",
                 type: "error",
                 duration: 1500,
-                onClose: () => {},
+                onClose: () => { },
             });
         }
         return Promise.reject(new Error(res.msg || "Error"));
     } else {
-        return res;
+        return response;
     }
 }
 
 export function useTokenMiddleware(define) {
     define.interceptors.request.use(normal);
-    // define.interceptors.response.use(response);
+    define.interceptors.response.use(response);
 
     return define;
 }
