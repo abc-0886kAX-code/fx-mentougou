@@ -1,52 +1,58 @@
 <!--
  * @FilePath: \fx-mentougou\src\pages\model\statistical-analysis\components\statistical-analysis-default.vue
  * @Author: zhangxin
- * @Date: 2023-04-14 14:46:56
+ * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 16:08:31
+ * @LastEditTime: 2023-07-21 15:40:04
  * @Description:
 -->
 <script setup>
+import * as mars3d from "mars3d";
+import "@/shared/shp2JsonLayer";
+import { useMars3d } from "@/biz/Mars3D/usecase/useMars3D";
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";
-import { SelectSite_Obtain, SelectSite_Server } from "../server";
-import { useDateWater } from "@/hooks/useDate.js";
+import { SiteInfo_Obtain, SiteInfo_Server } from '../server/info';
 import { usePopup } from "@/biz/Popup/usecase/usePopup";
 const popup = usePopup();
 const popupEntity = popup.define({
     width: "70%",
-    template: defineComponent(() => import("../dialog/dialog-statistical-analysis.vue")),
-    title: "统计分析",
+    template: defineComponent(() => import("@/pages/model/data-overview/dialog/dialog-data-overview.vue")),
 });
+const tableColumn = [
+    {
+        prop: "stnm",
+        label: "名称",
+        align: "center",
+        width: 215,
+    },
+    {
+        prop: "z",
+        label: "积水水深(cm)",
+        align: "center",
+        width: 60,
+    },
+];
+const handlerClick = (target) => {
+    const { graphic } = target;
+    const { attr, name } = graphic;
 
-const { loading } = SelectSite_Server.server;
-const selcetOptions = computed(() => transArray(unref(SelectSite_Server.server.result.source).data, []));
-
-const selectValue = ref([]);
-const dateVal = ref(useDateWater());
-const params = computed(() => {
-    return {
-        stcd: unref(selectValue).join(","),
-        starttime: unref(dateVal)[0],
-        endtime: unref(dateVal)[1],
-    };
-});
-
-async function executeQuery() {
-    await SelectSite_Obtain({ sttp: "RW", usfl: "01" });
+    popupEntity.show(attr);
+    popupEntity.setupTitle(name);
+};
+function handleRow(row) {
+    const { position } = row;
+    unref(mapview).flyToPoint(position, {
+        radius: 3000
+    })
 }
 
-function executeReset() {
-    dateVal.value = useDateWater();
-    selectValue.value = [];
-}
+const { loading } = SiteInfo_Server.server;
+const tableData = computed(() => transArray(unref(SiteInfo_Server.server.result.source).data, []));
+const { mapview } = useMars3d();
 
-function openPopup() {
-    popupEntity.show(unref(params));
-}
-
-onMounted(() => {
-    executeQuery();
+onMounted(async () => {
+    await SiteInfo_Obtain({ sttp: "WP" });
 });
 onBeforeUnmount(() => {
     popup.release(popupEntity);
@@ -54,59 +60,43 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="statistical-analysis-default" v-loading="loading" v-bind="loadStyle">
-        <div class="statistical-analysis-default-form">
-            <div class="statistical-analysis-default-form-item">
-                <div class="statistical-analysis-default-form-item-label">站名:</div>
-                <div class="statistical-analysis-default-form-item-plugin">
-                    <el-select v-model="selectValue" size="mini" multiple collapse-tags placeholder="请选择">
-                        <el-option v-for="item in selcetOptions" :key="item.stcd" :label="item.stnm" :value="item.stcd"> </el-option>
-                    </el-select>
-                </div>
-            </div>
-            <div class="statistical-analysis-default-form-item">
-                <div class="statistical-analysis-default-form-item-label">时间:</div>
-                <div class="statistical-analysis-default-form-item-plugin">
-                    <el-date-picker v-model="dateVal" size="mini" type="datetimerange" start-placeholder="开始日期" end-placeholder="结束日期" format="yyyy-MM-dd HH:mm:ss" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
-                </div>
-            </div>
-            <div class="statistical-analysis-default-form-item">
-                <el-button size="mini" type="primary" @click="openPopup"><i class="el-icon-search el-icon--left"></i>查询</el-button>
-                <el-button size="mini" type="danger" @click="executeReset"><i class="el-icon-refresh el-icon--left"></i>重置</el-button>
-            </div>
-        </div>
+    <div class="statistical-analysis-default">
+        <el-table class="statistical-analysis-default-table" v-loading="loading" v-bind="loadStyle" size="mini"
+            :data="tableData" width="100%" height="100%">
+            <el-table-column type="index" width="50" align="center"> </el-table-column>
+            <el-table-column label="操作" width="100" align="center">
+                <template slot-scope="scope">
+                    <el-link type="success"
+                        @click="handlerClick({ graphic: { attr: scope.row, name: scope.row.stnm } })">查看</el-link>
+                </template>
+            </el-table-column>
+            <template v-for="item in tableColumn">
+                <el-table-column v-if="item.prop === 'stnm'" :key="item.prop" :prop="item.prop" :label="item.label"
+                    :width="item.width" :align="item.align">
+                    <template slot-scope="scope">
+                        <el-link type="primary" @click="handleRow(scope.row)">{{ scope.row.stnm }}</el-link>
+                    </template>
+                </el-table-column>
+                <el-table-column v-else :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
+                    :align="item.align"> </el-table-column>
+            </template>
+        </el-table>
     </div>
 </template>
 
 <style scoped lang="scss">
+@import "@/assets/style/home-table.scss";
+
 .statistical-analysis-default {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    &-form {
+    display: flex;
+    flex-direction: column;
+
+    &-table {
         width: 100%;
         height: 100%;
-        padding: 20px;
-        box-sizing: border-box;
-        &-item {
-            width: 100%;
-            height: 30%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &-label {
-                width: 20%;
-                height: 100%;
-                text-align: center;
-            }
-            &-plugin {
-                width: 80%;
-                height: 100%;
-            }
-        }
+        overflow: hidden;
     }
-}
-:deep(.el-date-editor) {
-    width: 100% !important;
 }
 </style>

@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-21 13:17:47
+ * @LastEditTime: 2023-07-21 15:38:01
  * @Description:
 -->
 <script setup>
@@ -40,14 +40,7 @@ const tableColumn = [
         prop: "stnm",
         label: "名称",
         align: "center",
-        width: 220,
-    },
-    {
-        prop: "sttpname",
-        label: "站点类型",
-        align: "center",
-        width: 150,
-    },
+    }
 ];
 
 const setupFloat = (target) => {
@@ -104,40 +97,40 @@ const tableData = computed(() => transArray(unref(OverviewSite_Server.server.res
 const legendStore = useLayerLegend();
 const { mapview } = useMars3d();
 const { gather, setupLayer } = useLayer(mapview);
-const videoLayer = setupLayer({
-    type: "graphic",
-    name: "VideoPointLayer",
-    zIndex: 101,
-});
+// const videoLayer = setupLayer({
+//     type: "graphic",
+//     name: "VideoPointLayer",
+//     zIndex: 101,
+// });
 const pondLayer = setupLayer({
     type: "graphic",
     name: "PondPointLayer",
     zIndex: 101,
 });
-const rainfallLayer = setupLayer({
-    type: "graphic",
-    name: "RainfallPointLayer",
-    zIndex: 101,
-});
+// const rainfallLayer = setupLayer({
+//     type: "graphic",
+//     name: "RainfallPointLayer",
+//     zIndex: 101,
+// });
 
-const { find: videoFind, clear: videoClear } = unref(gather).VideoPointLayer;
-const videoEntity = videoFind();
-const videoPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sttp === "VD");
-    return data.map(setupRoundPoint);
-});
+// const { find: videoFind, clear: videoClear } = unref(gather).VideoPointLayer;
+// const videoEntity = videoFind();
+// const videoPoints = computed(() => {
+//     const data = unref(tableData).filter((item) => item.sttp === "VD");
+//     return data.map(setupRoundPoint);
+// });
 const { find: pondFind, clear: pondClear } = unref(gather).PondPointLayer;
 const pondEntity = pondFind();
 const pondPoints = computed(() => {
     const data = unref(tableData).filter((item) => item.sttp === "WP");
     return data.map(setupRoundPoint);
 });
-const { find: rainfallFind, clear: rainfallClear } = unref(gather).RainfallPointLayer;
-const rainfallEntity = rainfallFind();
-const rainfallPoints = computed(() => {
-    const data = unref(tableData).filter((item) => item.sttp === "PP");
-    return data.map(setupRoundPoint);
-});
+// const { find: rainfallFind, clear: rainfallClear } = unref(gather).RainfallPointLayer;
+// const rainfallEntity = rainfallFind();
+// const rainfallPoints = computed(() => {
+//     const data = unref(tableData).filter((item) => item.sttp === "PP");
+//     return data.map(setupRoundPoint);
+// });
 const { setupFloatHide, setupFloatWindow } = inject("Mars3dFloat");
 const handlerClick = (target) => {
     const { graphic } = target;
@@ -227,23 +220,26 @@ function renderSHPLayer() {
 }
 
 async function executeQuery(params) {
-    videoClear();
+    // videoClear();
     pondClear();
-    rainfallClear();
+    // rainfallClear();
     await OverviewSite_Obtain(params);
-    videoEntity.addGraphic(unref(videoPoints));
+    // videoEntity.addGraphic(unref(videoPoints));
     pondEntity.addGraphic(unref(pondPoints));
-    rainfallEntity.addGraphic(unref(rainfallPoints));
+    pondEntity.flyTo({
+        scale: 5.0
+    })
+    // rainfallEntity.addGraphic(unref(rainfallPoints));
     const SHPEntity = renderSHPLayer();
     legendStore.setCheckList([
-        {
-            keyword: "video",
-            label: "视频站",
-            entity: videoEntity,
-            size: videoEntity.length,
-            show: true,
-            icon: SHIPINGICON,
-        },
+        // {
+        //     keyword: "video",
+        //     label: "视频站",
+        //     entity: videoEntity,
+        //     size: videoEntity.length,
+        //     show: true,
+        //     icon: SHIPINGICON,
+        // },
         {
             keyword: "pond",
             label: "积水检测",
@@ -252,14 +248,14 @@ async function executeQuery(params) {
             show: true,
             icon: JISHUIICON,
         },
-        {
-            keyword: "rainfall",
-            label: "雨量站",
-            entity: rainfallEntity,
-            size: rainfallEntity.length,
-            show: true,
-            icon: YULIANGICON,
-        },
+        // {
+        //     keyword: "rainfall",
+        //     label: "雨量站",
+        //     entity: rainfallEntity,
+        //     size: rainfallEntity.length,
+        //     show: true,
+        //     icon: YULIANGICON,
+        // },
         {
             keyword: "history",
             label: "历史积水点",
@@ -274,20 +270,20 @@ async function executeQuery(params) {
 const selectValue = ref([]);
 const selcetOptions = computed(() => transArray(unref(Select_Server.server.result.source).data, []));
 function selectChange(value) {
-    executeQuery({ sttp: value.join(",") });
+    executeQuery({ sttp: "WP" });
 }
 
 onMounted(async () => {
-    setupBind(videoLayer);
+    // setupBind(videoLayer);
     setupBind(pondLayer);
-    setupBind(rainfallLayer);
-    await Select_Obtain({ codeid: "GB", code: "WP,VD" });
-    executeQuery();
+    // setupBind(rainfallLayer);
+    // await Select_Obtain({ codeid: "GB", code: "WP" });
+    executeQuery({ sttp: "WP" });
 });
 onBeforeUnmount(() => {
-    videoLayer.remove();
+    // videoLayer.remove();
     pondLayer.remove();
-    rainfallLayer.remove();
+    // rainfallLayer.remove();
     legendStore.clearCheckList();
     popup.release(popupEntity);
     popup.release(popupSHPEntity);
@@ -296,7 +292,7 @@ onBeforeUnmount(() => {
 
 <template>
     <div class="data-overview-default">
-        <div class="data-overview-default-select">
+        <!-- <div class="data-overview-default-select">
             <div class="data-overview-default-select-label">站点类型:</div>
             <div class="data-overview-default-select-form">
                 <el-select v-model="selectValue" size="mini" multiple collapse-tags placeholder="请选择"
@@ -305,7 +301,7 @@ onBeforeUnmount(() => {
                         :value="item.code"> </el-option>
                 </el-select>
             </div>
-        </div>
+        </div> -->
         <el-table class="data-overview-default-table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData"
             width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
@@ -337,28 +333,28 @@ onBeforeUnmount(() => {
     flex-direction: column;
 
     // overflow-y: auto;
-    &-select {
-        width: 100%;
-        height: 20%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: baseline;
+    // &-select {
+    //     width: 100%;
+    //     height: 20%;
+    //     display: flex;
+    //     justify-content: space-evenly;
+    //     align-items: baseline;
 
-        &-label {
-            text-align: center;
-            width: 20%;
-            height: 100%;
-        }
+    //     &-label {
+    //         text-align: center;
+    //         width: 20%;
+    //         height: 100%;
+    //     }
 
-        &-form {
-            width: 60%;
-            height: 100%;
-        }
-    }
+    //     &-form {
+    //         width: 60%;
+    //         height: 100%;
+    //     }
+    // }
 
     &-table {
         width: 100%;
-        height: 80%;
+        height: 100%;
         overflow: hidden;
     }
 }

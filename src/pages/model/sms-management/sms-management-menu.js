@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:54:38
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-17 16:00:29
+ * @LastEditTime: 2023-07-21 13:56:48
  * @Description:
  */
 import SmsManagementDefault from "./components/sms-management-default.vue";
@@ -12,7 +12,7 @@ export default {
     menu: [
         {
             id: "e7c011a06efa4db7b8514198dcbafcee",
-            label: "警示信息",
+            label: "LED屏",
             component: SmsManagementDefault,
             render: false,
             fragment: true,

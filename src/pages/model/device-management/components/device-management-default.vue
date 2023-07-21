@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:55:00
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-12 15:12:23
+ * @LastEditTime: 2023-07-21 15:41:13
  * @Description:
 -->
 <script setup>
@@ -25,12 +25,6 @@ const popupEntity = popup.define({
 const { loading } = DeviceManage_Server.server;
 const tableData = computed(() => transArray(unref(DeviceManage_Server.server.result.source).data, []));
 const tableColumn = [
-    {
-        prop: "id",
-        label: "设备编号",
-        align: "center",
-        width: 100,
-    },
     {
         prop: "devicename",
         label: "设备名称",
@@ -89,7 +83,8 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <el-table class="device-management-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
+    <el-table class="device-management-default" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData"
+        width="100%" height="100%">
         <el-table-column type="index" width="60" align="center">
             <template slot="header" slot-scope="scope">
                 <el-link type="success" @click="handleAdd">新增</el-link>
@@ -103,7 +98,8 @@ onBeforeUnmount(() => {
             </template>
         </el-table-column>
         <template v-for="item in tableColumn">
-            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
+            <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align">
+            </el-table-column>
         </template>
     </el-table>
 </template>

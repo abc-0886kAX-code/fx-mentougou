@@ -1,14 +1,27 @@
-:deep(.el-tabs--left) {
-    width: 100% !important;
+:deep(.el-tabs--border-card) {
+    // width: 100% !important;
     height: 100% !important;
     color: #fff !important;
+    background: transparent !important;
+}
+:deep(.el-tabs__header){
+    background: transparent !important;
 }
 :deep(.el-tabs__item) {
     color: #fff !important;
+    border: none !important;
 }
 :deep(.el-tabs__item:hover) {
     color: #409eff !important;
+    border: none !important;
 }
 :deep(.is-active) {
     color: #409eff !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+:deep(.el-tabs__nav){
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
