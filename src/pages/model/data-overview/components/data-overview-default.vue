@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 16:21:55
+ * @LastEditTime: 2023-07-21 13:17:47
  * @Description:
 -->
 <script setup>
@@ -281,7 +281,7 @@ onMounted(async () => {
     setupBind(videoLayer);
     setupBind(pondLayer);
     setupBind(rainfallLayer);
-    await Select_Obtain({ codeid: "GB", code: "PP,WP,VD" });
+    await Select_Obtain({ codeid: "GB", code: "WP,VD" });
     executeQuery();
 });
 onBeforeUnmount(() => {
@@ -299,25 +299,31 @@ onBeforeUnmount(() => {
         <div class="data-overview-default-select">
             <div class="data-overview-default-select-label">站点类型:</div>
             <div class="data-overview-default-select-form">
-                <el-select v-model="selectValue" size="mini" multiple collapse-tags placeholder="请选择" @change="selectChange">
-                    <el-option v-for="item in selcetOptions" :key="item.orderid" :label="item.description" :value="item.code"> </el-option>
+                <el-select v-model="selectValue" size="mini" multiple collapse-tags placeholder="请选择"
+                    @change="selectChange">
+                    <el-option v-for="item in selcetOptions" :key="item.orderid" :label="item.description"
+                        :value="item.code"> </el-option>
                 </el-select>
             </div>
         </div>
-        <el-table class="data-overview-default-table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData" width="100%" height="100%">
+        <el-table class="data-overview-default-table" v-loading="loading" v-bind="loadStyle" size="mini" :data="tableData"
+            width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
             <el-table-column label="操作" width="100" align="center">
                 <template slot-scope="scope">
-                    <el-link type="success" @click="handlerClick({ graphic: { attr: scope.row, name: scope.row.stnm } })">查看</el-link>
+                    <el-link type="success"
+                        @click="handlerClick({ graphic: { attr: scope.row, name: scope.row.stnm } })">查看</el-link>
                 </template>
             </el-table-column>
             <template v-for="item in tableColumn">
-                <el-table-column v-if="item.prop === 'stnm'" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align">
+                <el-table-column v-if="item.prop === 'stnm'" :key="item.prop" :prop="item.prop" :label="item.label"
+                    :width="item.width" :align="item.align">
                     <template slot-scope="scope">
                         <el-link type="primary" @click="handleRow(scope.row)">{{ scope.row.stnm }}</el-link>
                     </template>
                 </el-table-column>
-                <el-table-column v-else :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width" :align="item.align"> </el-table-column>
+                <el-table-column v-else :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
+                    :align="item.align"> </el-table-column>
             </template>
         </el-table>
     </div>
@@ -329,6 +335,7 @@ onBeforeUnmount(() => {
     height: 100%;
     display: flex;
     flex-direction: column;
+
     // overflow-y: auto;
     &-select {
         width: 100%;
@@ -336,16 +343,19 @@ onBeforeUnmount(() => {
         display: flex;
         justify-content: space-evenly;
         align-items: baseline;
+
         &-label {
             text-align: center;
             width: 20%;
             height: 100%;
         }
+
         &-form {
             width: 60%;
             height: 100%;
         }
     }
+
     &-table {
         width: 100%;
         height: 80%;
