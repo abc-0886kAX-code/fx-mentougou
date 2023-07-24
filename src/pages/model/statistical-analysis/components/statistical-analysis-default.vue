@@ -3,12 +3,11 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-21 15:40:04
+ * @LastEditTime: 2023-07-24 14:55:33
  * @Description:
 -->
 <script setup>
 import * as mars3d from "mars3d";
-import "@/shared/shp2JsonLayer";
 import { useMars3d } from "@/biz/Mars3D/usecase/useMars3D";
 import { loadStyle } from "@/biz/share/entify/Load";
 import { transArray } from "~/shared/trans";

@@ -1,6 +1,13 @@
-// import { toGeoJSON as shpToGeoJSON } from "shp-geojson"
+/*
+ * @FilePath: \fx-mentougou\src\shared\shp2JsonLayer.js
+ * @Author: zhangxin
+ * @Date: 2023-05-17 14:57:07
+ * @LastEditors: zhangxin
+ * @LastEditTime: 2023-07-24 14:57:04
+ * @Description:
+ */
+import * as shpUtil from 'shp-geojson'
 import * as mars3d from "mars3d";
-import "./shp-geojson.js";
 /**
  * 閫氳繃杞琯eojson鏂瑰紡 鍔犺浇shp鏂囦欢銆�
  * shpUtil 浣跨敤闇€瑕佸紩鍏� ../lib/geojson/shp-geojson.js鏂囦欢

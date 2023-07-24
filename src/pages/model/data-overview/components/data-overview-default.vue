@@ -3,13 +3,12 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-21 15:38:01
+ * @LastEditTime: 2023-07-24 14:56:28
  * @Description:
 -->
 <script setup>
 import { EventType, graphic, Cesium } from "mars3d";
 import * as mars3d from "mars3d";
-import "@/shared/shp2JsonLayer";
 import { useMars3d } from "@/biz/Mars3D/usecase/useMars3D";
 import { useLayer } from "@/biz/Mars3D/usecase/useLayer";
 import { useLocation } from "@/biz/Mars3D/usecase/useLocation";
@@ -260,7 +259,7 @@ async function executeQuery(params) {
             keyword: "history",
             label: "历史积水点",
             entity: SHPEntity,
-            size: "-",
+            size: 12,
             show: true,
             icon: LISHIJSICON,
         },

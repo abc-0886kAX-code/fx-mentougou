@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-17 13:09:52
+ * @LastEditTime: 2023-07-24 14:56:49
  * @Description:
  */
 import Vue from "vue";
@@ -14,7 +14,7 @@ import { extendScroll } from "@/extend/scroll";
 import * as echarts from "echarts";
 import "@/assets/font/font.css";
 import "./permission";
-
+import "@/shared/shp2JsonLayer";
 import App from "@/layout/App.vue";
 
 import "normalize.css";
