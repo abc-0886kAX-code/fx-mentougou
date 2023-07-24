@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:46:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-21 17:09:58
+ * @LastEditTime: 2023-07-24 14:11:53
  * @Description:
 -->
 <script setup>
@@ -27,7 +27,7 @@ const popup = usePopup();
 const popupEntity = popup.define({
     width: "60%",
     title: "实时监控",
-    template: defineComponent(() => import("@/pages/model/data-overview/dialog/tabs/data-overview.vue")),
+    template: defineComponent(() => import("../dialog/dialog-real-time-monitor.vue")),
 });
 
 const tableColumn = [
@@ -173,11 +173,12 @@ onBeforeUnmount(() => {
 <template>
     <div class="real-time-monitor-default">
         <div class="real-time-monitor-default-stat">
-            <div class="real-time-monitor-default-stat-total">监控总数 {{ tableInfo.total }}</div>
-            <div class="real-time-monitor-default-stat-state">在线 {{ tableInfo.online }} - 离线 {{ tableInfo.offline }}</div>
+            <el-tag type="" effect="dark">监控总数:{{ tableInfo.total }}</el-tag>
+            <el-tag type="success" effect="dark">在线:{{ tableInfo.online }}</el-tag>
+            <el-tag type="danger" effect="dark">离线:{{ tableInfo.offline }}</el-tag>
         </div>
         <el-table class="real-time-monitor-default-table" v-loading="loading" v-bind="loadStyle" size="mini"
-            :data="tableData" @row-click="handleRow" width="100%" height="100%">
+            :data="tableData" width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
             <el-table-column label="操作" width="100" align="center">
                 <template slot-scope="scope">
@@ -215,11 +216,12 @@ onBeforeUnmount(() => {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        color: #fff;
+        padding: 5px 0;
+
     }
 
     &-table {
-        height: calc(100% - 30px);
+        height: calc(100% - 40px);
         width: 100%;
         overflow-y: auto;
     }
