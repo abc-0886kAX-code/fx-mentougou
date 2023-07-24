@@ -2,7 +2,7 @@
  * @Author: zhangyang
  * @Date: 2022-04-24 12:15:08
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 10:44:21
+ * @LastEditTime: 2023-07-24 14:27:37
  * @Description: mars3d.config.Pro
  */
 import { CRS } from "mars3d";
@@ -18,13 +18,18 @@ const { VITE_CESIUMTOKEN, VITE_TIANMAPKEY, VITE_ROOT_LAYERID, VITE_OFFLINEMAP_UR
 export default (mode = 3) => {
     const config = {
         scene: {
+            center: {
+                lng: 115.80146,
+                lat: 40.14048,
+                alt: 209882,
+            },
             globe: {
                 show: true,
                 baseColor: "#333333",
-                depthTestAgainstTerrain: true,
+                depthTestAgainstTerrain: false,
                 showGroundAtmosphere: true,
                 enableLighting: false,
-                tileCacheSize: 1024,
+                tileCacheSize: 512,
                 terrainExaggeration: 1.0,
                 terrainExaggerationRelativeHeight: 0.0,
             },
@@ -43,12 +48,12 @@ export default (mode = 3) => {
             removeDblClick: true,
             ionToken: VITE_CESIUMTOKEN,
             resolutionScale: 1.0,
-            showSun: true,
-            showMoon: true,
+            showSun: false,
+            showMoon: false,
             showSkyBox: true,
-            showSkyAtmosphere: true,
-            fog: true,
-            fxaa: true,
+            showSkyAtmosphere: false,
+            fog: false,
+            fxaa: false,
             highDynamicRange: false,
             backgroundColor: "#333333",
             sceneMode: mode,
@@ -93,7 +98,7 @@ export default (mode = 3) => {
             geocoderConfig: { key: ["66f2edf04639c811fc275fe300a25b49"] }, //POI查询按钮参数配置
             // 张鑫高德创建的key
             // http://mars3d.cn/editor-vue.html?id=control/other/display&code=1 从官方中发送一个请求 查看key
-            homeButton: false,
+            homeButton: true,
             // sceneModePicker: mode === 3,
             sceneModePicker: false,
             projectionPicker: false,
@@ -103,11 +108,10 @@ export default (mode = 3) => {
         },
         // 地形服务配置
         terrain: {
-            // url: "http://data.mars3d.cn/terrain",
-            // url: "/m3d/data/terrain",
-            // requestWaterMask: true,
-            // requestVertexNormals: true,
-            // show: true,
+            url: "http://data.mars3d.cn/terrain",
+            requestWaterMask: false,
+            requestVertexNormals: false,
+            show: false,
         },
         // 底图图层配置
         basemaps: [
@@ -115,18 +119,6 @@ export default (mode = 3) => {
                 type: "group",
                 id: 10,
                 name: "功能图层",
-            },
-            {
-                show: false,
-                name: "离线地图",
-                icon: image_basemap,
-                type: "tms",
-                url: `${VITE_OFFLINEMAP_URL}quzhoutest`,
-                crs: CRS.EPSG3857,
-                minimumLevel: 0,
-                maximumLevel: VITE_OFFLINEMAP_LEVEL,
-                fileExtension: "png",
-                rectangle: { xmax: 118.386224733068, ymax: 32.2503661166022, ymin: 32.2115498736139, xmin: 118.340455518438 },
             },
             {
                 show: true,
