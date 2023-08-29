@@ -3,13 +3,14 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 15:00:13
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-31 17:56:38
+ * @LastEditTime: 2023-08-29 13:02:28
  * @Description:
 -->
 <script setup>
 import { useDialog } from "@/biz/Popup/usecase/useDialog";
 import { loadStyle } from "@/biz/share/entify/Load";
 import { useDateWater } from "@/hooks/useDate.js";
+import { exportExcel } from '@/shared/exportExcel';
 import { ChartData_Server, ChartData_Obtain } from "@/pages/model/data-overview/server/chart";
 const tableColumn = [
     {
@@ -52,7 +53,8 @@ async function executeReset() {
     executeQuery();
 }
 function executeExport() {
-    console.log(unref(params));
+    exportExcel('#data-table-body',unref(config).stnm)
+    // console.log(unref(config));
 }
 
 onMounted(() => {
@@ -74,7 +76,7 @@ onMounted(() => {
                         class="el-icon-upload el-icon--left"></i>导出</el-button>
             </div>
         </div>
-        <el-table class="data-table-body" size="mini" :data="source" width="100%" height="100%">
+        <el-table id="data-table-body" class="data-table-body" size="mini" :data="source" width="100%" height="100%">
             <el-table-column type="index" width="50" align="center"> </el-table-column>
             <template v-for="item in tableColumn">
                 <el-table-column :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"

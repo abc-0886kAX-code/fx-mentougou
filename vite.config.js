@@ -3,7 +3,7 @@
  * @Author: maggot-code
  * @Date: 2022-11-21 14:19:59
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-20 10:51:45
+ * @LastEditTime: 2023-08-29 10:47:34
  * @Description:
  */
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from "vite";
@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
         base: VITE_ASSETS,
         clearScreen: true,
         server: {
-            https: false,
+            https: true,
             hmr: {
                 overlay: true,
             },

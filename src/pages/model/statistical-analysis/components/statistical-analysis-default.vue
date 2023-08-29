@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-14 14:45:31
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-24 14:55:33
+ * @LastEditTime: 2023-08-29 10:40:41
  * @Description:
 -->
 <script setup>
@@ -27,7 +27,7 @@ const tableColumn = [
     },
     {
         prop: "z",
-        label: "积水水深(cm)",
+        label: "积水水深(m)",
         align: "center",
         width: 60,
     },

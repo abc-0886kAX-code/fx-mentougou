@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-26 17:31:30
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-05-30 17:53:52
+ * @LastEditTime: 2023-08-29 11:21:06
  * @Description:
 -->
 <script setup>
@@ -19,11 +19,13 @@ const dialog = useDialog(props.popupKeyword);
 const config = computed(() => unref(dialog.config));
 
 const ModifyForm = ref();
+
 const form = ref({
     truename: "",
     loginname: "",
     userid: "",
     remark: "",
+    password: "",
 });
 
 const rules = {
@@ -34,10 +36,17 @@ const rules = {
             trigger: "blur",
         },
     ],
-    role: [
+    sex: [
         {
             required: true,
-            message: "角色不可为空",
+            message: "性别不可为空",
+            trigger: "blur",
+        },
+    ],
+    loginname: [
+        {
+            required: true,
+            message: "登录账号不可为空",
             trigger: "blur",
         },
     ],
@@ -81,7 +90,7 @@ onMounted(() => {
                 <el-form-item prop="truename" label="人员姓名"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入人员姓名" v-model="form.truename"></el-input> </el-form-item
             ></el-col>
             <el-col :span="12">
-                <el-form-item prop="truename" label="性别">
+                <el-form-item prop="sex" label="性别">
                     <el-select v-model="form.sex" placeholder="请选择性别">
                         <el-option label="男" value="01"></el-option>
                         <el-option label="女" value="02"></el-option>
@@ -92,7 +101,12 @@ onMounted(() => {
 
         <el-row :gutter="20">
             <el-col :span="24">
-                <el-form-item prop="loginname" label="登录账号"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入登录账号" v-model="form.loginname" disabled></el-input> </el-form-item>
+                <el-form-item prop="loginname"  label="登录账号"> <el-input type="text" prefix-icon="el-icon-edit" placeholder="请输入登录账号" v-model="form.loginname" ></el-input> </el-form-item>
+            </el-col>
+        </el-row>
+        <el-row v-if="form.userid" :gutter="20">
+            <el-col :span="24">
+                <el-form-item prop="password" label="登录密码"> <el-input type="password" show-password prefix-icon="el-icon-edit" placeholder="请输入登录密码" v-model="form.password" ></el-input> </el-form-item>
             </el-col>
         </el-row>
         <el-row :gutter="20">
@@ -101,6 +115,11 @@ onMounted(() => {
                     <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4 }" prefix-icon="el-icon-edit" placeholder="请输入备注" v-model="form.remark"></el-input>
                 </el-form-item>
             </el-col>
+        </el-row>
+        <el-row :gutter="20" v-if="!form.userid">
+            <div class="dialog-system-management-msg">
+                初始密码为: mtg@2023
+            </div>
         </el-row>
         <el-form-item class="dialog-system-management-console">
             <el-button class="dialog-system-management-console-button" type="primary" size="mini" :loading="loading" @click="onModify">保存信息</el-button>
@@ -122,6 +141,11 @@ onMounted(() => {
         &-button {
             width: 80px;
         }
+    }
+    &-msg{
+        color: #ff4757;
+        font-size: 12px;
+        margin-top: 10px;
     }
 }
 :deep(.el-form-item__label) {

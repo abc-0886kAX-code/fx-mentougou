@@ -68,7 +68,7 @@ function setupOptions() {
         yAxis: [
             {
                 type: "value",
-                name: "水深(cm)",
+                name: "水深(m)",
                 alignTicks: true,
                 min: 0,
                 max: function (value) {
@@ -94,7 +94,7 @@ function setupOptions() {
         // 历史雨量 历史水位 预报雨量 预报水位
         series: [
             {
-                name: "水深(cm)",
+                name: "水深(m)",
                 yAxisIndex: 0,
                 data: unref(source).map((item) => item.z),
                 type: "line",

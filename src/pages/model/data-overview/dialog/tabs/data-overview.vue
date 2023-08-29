@@ -3,7 +3,7 @@
  * @Author: zhangxin
  * @Date: 2023-04-17 14:59:52
  * @LastEditors: zhangxin
- * @LastEditTime: 2023-07-24 14:09:48
+ * @LastEditTime: 2023-08-29 10:39:59
  * @Description:
 -->
 <script setup>
@@ -37,8 +37,10 @@ const params = computed(() => {
     };
 });
 const LEDStyle = computed(() => {
+    const isMsg = unref(source).showmsg?.length > 0
+
     return {
-        width: `calc(100% + ${unref(source).showmsg?.length * 46 ?? 0 * 46}px)`,
+        width: `calc(100% + ${isMsg ? unref(source).showmsg?.length : 4 * 46 ?? 0 * 46}px)`,
         color: unref(source).color ?? 'rgba(255, 0, 0, 1)'
     };
 });
@@ -82,7 +84,7 @@ onMounted(() => {
                             积水数据
                         </div>
                         <div class="data-overview-info-content-info-item-text">
-                            当前积水水位 - {{ source.z ?? "暂无数据" }}
+                            当前积水水位(m) - {{ source.z ?? "暂无数据" }}
                         </div>
                     </div>
                     <div class="data-overview-info-content-info-item">
@@ -100,8 +102,7 @@ onMounted(() => {
             <div class="data-overview-led-label">LED展示区域</div>
             <div class="data-overview-led-content">
                 <div class="data-overview-led-content-led">
-                    <div class="data-overview-led-content-led-animation" :style="LEDStyle">{{ source.showmsg ?? "暂无信息"
-                    }}
+                    <div class="data-overview-led-content-led-animation" :style="LEDStyle">{{ source.showmsg ?? "暂无数据" }}
                     </div>
                 </div>
             </div>
